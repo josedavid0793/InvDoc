@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\TipoDocumento;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -32,6 +33,8 @@ class UsuarioController extends Controller
             'nombres' => 'required|string|max:200',
             'apellidos' => 'nullable|string|max:250',
             'email' => 'required|string|email:rfc,dns|max:300',
+            'contraseña' => 'required|string|max:500',
+            'confirmar_contraseña' => 'required|string|max:500|same:contraseña',
             'tipo_documento' => 'required|string',
             'numero_documento' => 'required|string',
             'telefono' => 'required|numeric',
@@ -50,6 +53,8 @@ class UsuarioController extends Controller
             $usuario->nombres = $request->nombres;
             $usuario->apellidos = $request->apellidos;
             $usuario->email = $request->email;
+            $usuario->contraseña = Hash::make($request->contraseña);
+            $usuario->confirmar_contraseña = Hash::make($request->confirmar_contraseña);
             $usuario->tipo_documento = $request->tipo_documento;
             $usuario->numero_documento = $request->numero_documento;
             $usuario->telefono = $request->telefono;
@@ -101,6 +106,8 @@ class UsuarioController extends Controller
             'nombres' => 'required|string|max:200',
             'apellidos' => 'nullable|string|max:250',
             'email' => 'required|string|max:300|email',
+            'contraseña' => 'required|string|max:500',
+            'confirmar_contraseña' => 'required|string|max:500|same:contraseña',
             'tipo_documento' => 'required|string',
             'numero_documento' => 'required|string',
             'telefono' => 'required|numeric',
@@ -119,6 +126,8 @@ class UsuarioController extends Controller
             $usuario->nombres = $request->nombres;
             $usuario->apellidos = $request->apellidos;
             $usuario->email = $request->email;
+            $usuario->contraseña = Hash::make($request->contraseña);
+            $usuario->confirmar_contraseña = Hash::make($request->confirmar_contraseña);
             $usuario->tipo_documento = $request->tipo_documento;
             $usuario->numero_documento = $request->numero_documento;
             $usuario->telefono = $request->telefono;

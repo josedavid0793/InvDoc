@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nombres', 200);
             $table->string('apellidos', 250);
             $table->string('email', 300)->unique();
+            $table->string('contraseña',500);
+            $table->string('confirmar_contraseña',500);
             $table->string('tipo_documento', 10);
             $table->unsignedBigInteger('numero_documento')->unique();
             $table->unsignedBigInteger('telefono')->unique();
