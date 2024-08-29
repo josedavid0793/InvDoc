@@ -1,0 +1,210 @@
+header {
+  background: #fdfefe;
+}
+.div-navbar {
+  align-items: center;
+  background-color: #f8f8f8; /* Color de fondo opcional */
+  box-sizing: border-box;
+  display: flex;
+  /* flex-wrap: wrap;*/
+  inline-size: 100%; /*mismo width*/
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.logo-img img {
+  block-size: auto; /*mismo height*/
+  max-inline-size: 100px; /* Ajusta el tamaño máximo del logo */ /*mismo max-height*/
+}
+
+nav {
+  flex-basis: 100%;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+.ul-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ul-links li {
+  margin: 0 15px;
+}
+
+.ul-links a {
+  color: #333; /* Color del texto de los enlaces */
+  font-weight: bold;
+  text-decoration: none;
+}
+.ul-links a:hover {
+  cursor: pointer;
+}
+
+.div-buttons {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}
+
+.div-buttons input[type="button"] {
+  background-color: #fff;
+  block-size: 45px;
+  border: 1px solid #ccc;
+  border-radius: 17px;
+  cursor: pointer;
+  font-size: 15px;
+  inline-size: 124px;
+  letter-spacing: 0.4px;
+  padding: 5px 15px;
+}
+
+.div-buttons input[type="button"]:hover {
+  background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+  cursor: pointer;
+}
+
+.hd-img-menu {
+  display: none;
+}
+.contenedor-texto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  block-size: 100vh;
+  padding: 0 20px;
+  background-color: #f7f7f7; /* Fondo claro para resaltar la sombra */
+  border-radius: 10px; /* Bordes ligeramente redondeados */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra inicial suave */
+  opacity: 0;
+  transform: translateY(20px); /* Desplazado ligeramente hacia abajo */
+  animation: fadeInAndRise 1.5s ease forwards,
+    colorPulse 5s ease-in-out infinite;
+}
+
+/* Animación de entrada */
+@keyframes fadeInAndRise {
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Sube a su posición original */
+  }
+}
+
+/* Animación de color */
+@keyframes colorPulse {
+  0%,
+  100% {
+    background-color: #f7f7f7; /* Color original */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra inicial */
+  }
+  50% {
+    background-color: #e0f7fa; /* Color sutilmente diferente */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+  }
+}
+
+.div-header {
+  max-inline-size: 600px; /* Limita el ancho máximo del contenido */
+  margin: 0 auto;
+}
+
+.div-header h1 {
+  font-size: 2rem;
+  margin-block-end: 20px;
+  font-weight: 600;
+}
+
+.div-header p {
+  font-size: 1.2rem;
+  margin-block-end: 20px;
+}
+
+.div-header a {
+  display: inline-block;
+  margin-block-start: 20px;
+  padding: 10px 20px;
+  background-color: #00796b;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.div-header a:hover {
+  background-color: #004d40; /* Más oscuro al pasar el mouse */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más profunda al pasar el mouse */
+  cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .div-navbar {
+    padding: 10px 10px;
+    flex-wrap: nowrap;
+    block-size: 153px;
+  }
+  /*nav {
+        margin-block-start: 10px;
+        display: none; /* Ocultar el menú por defecto 
+        text-align: start;
+    }*/
+  nav {
+    display: none;
+    position: absolute;
+    inset-block-start: 11%;
+    margin-inline-start: 83px;
+  }
+  .ul-links {
+    flex-direction: row;
+    gap: 9px;
+  }
+  .ul-links li {
+    margin: 10px 0;
+  }
+  nav.show-menu {
+    display: block; /* Mostrar el menú cuando menuVisible es true */
+  }
+  .div-buttons {
+    margin-inline-start: auto;
+    margin-inline-end: 50px; /* Espacio para el icono del menú */
+  }
+
+  .div-buttons input[type="button"] {
+    font-size: 12px;
+    inline-size: 99px;
+    block-size: 30px;
+    letter-spacing: 0;
+  }
+  .hd-img-menu {
+    display: block;
+    position: absolute;
+    inset-inline-end: 16px;
+    inset-block-start: 7%;
+    transform: translateY(-50%);
+    block-size: 30px;
+    inline-size: auto;
+  }
+  .contenedor-texto {
+    padding: 20px; /* Más espacio alrededor del contenido en pantallas pequeñas */
+    block-size: 32vh;
+  }
+
+  .div-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .div-header p {
+    font-size: 1rem;
+  }
+
+  .div-header a {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}

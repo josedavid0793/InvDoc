@@ -1,0 +1,34 @@
+<header>
+  <div class="div-navbar">
+    <div class="logo-img">
+      <img src="../../../assets/logo_invdoc.png" alt="InvDoc" />
+    </div>
+    <nav [ngClass]="{ 'show-menu': menuVisible }">
+      <ul class="ul-links">
+        <li><a>Inicio</a></li>
+        <li><a>¿Porque InvDoc?</a></li>
+        <li><a>Contactanos</a></li>
+      </ul>
+    </nav>
+    <div class="div-buttons">
+      <input type="button" value="Registro" />
+      <input type="button" value="Login" />
+    </div>
+    <div class="hd-img-menu" (click)="toggleMenu($event)" #menuIcon>
+      <img src="../../../assets/menu.png" />
+    </div>
+  </div>
+  <div class="contenedor-texto">
+    <div class="div-header">
+      <h1>Administra tu negocio o empresa de manera rápida y eficiente</h1>
+      <p>
+        Gestiona tus cuentas, inventarios, nómina, transacciones y todas las
+        actividades de tu negocio o empresa de manera organizada y segura.
+      </p>
+
+      <div>
+        <a>¡Quiero usar InvDoc!</a>
+      </div>
+    </div>
+  </div>
+</header>
