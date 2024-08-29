@@ -5,11 +5,15 @@ header {
   align-items: center;
   background-color: #f8f8f8; /* Color de fondo opcional */
   box-sizing: border-box;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Añade un sutil sombreado */
   display: flex;
   /* flex-wrap: wrap;*/
   inline-size: 100%; /*mismo width*/
+  inset-block-start: 0;
   justify-content: space-between;
   padding: 10px 20px;
+  position: fixed;
+  z-index: 1000; /* Asegura que la barra de navegación esté por encima de otros elementos */
 }
 .logo-img img {
   block-size: auto; /*mismo height*/
@@ -51,7 +55,7 @@ nav {
   gap: 10px; /* Espacio entre los botones */
 }
 
-.div-buttons input[type="button"] {
+/*.div-buttons input[type="button"] {
   background-color: #fff;
   block-size: 45px;
   border: 1px solid #ccc;
@@ -64,6 +68,25 @@ nav {
 }
 
 .div-buttons input[type="button"]:hover {
+  background-color: #e0e0e0; /* Color de fondo al pasar el mouse 
+  cursor: pointer;
+}*/
+.div-buttons a{
+  background-color: #fff;
+  block-size: 25px;
+  border: 1px solid #ccc;
+  border-radius: 17px;
+  color: #000;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  inline-size: 100px;
+  letter-spacing: 0.4px;
+  padding: 5px 15px;
+  text-decoration: none;
+  text-align: center;
+}
+.div-buttons a:hover {
   background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
   cursor: pointer;
 }
@@ -85,6 +108,8 @@ nav {
   transform: translateY(20px); /* Desplazado ligeramente hacia abajo */
   animation: fadeInAndRise 1.5s ease forwards,
     colorPulse 5s ease-in-out infinite;
+padding-block-start: 80px; /* Añade un margen superior para compensar la altura de la barra de navegación fija */
+
 }
 
 /* Animación de entrada */
@@ -148,12 +173,8 @@ nav {
     padding: 10px 10px;
     flex-wrap: nowrap;
     block-size: 153px;
+    position: static;
   }
-  /*nav {
-        margin-block-start: 10px;
-        display: none; /* Ocultar el menú por defecto 
-        text-align: start;
-    }*/
   nav {
     display: none;
     position: absolute;
@@ -175,10 +196,10 @@ nav {
     margin-inline-end: 50px; /* Espacio para el icono del menú */
   }
 
-  .div-buttons input[type="button"] {
+  .div-buttons a {
     font-size: 12px;
-    inline-size: 99px;
-    block-size: 30px;
+    inline-size: 80px;
+    block-size: 20px;
     letter-spacing: 0;
   }
   .hd-img-menu {

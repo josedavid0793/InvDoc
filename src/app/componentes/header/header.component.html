@@ -5,14 +5,16 @@
     </div>
     <nav [ngClass]="{ 'show-menu': menuVisible }">
       <ul class="ul-links">
-        <li><a>Inicio</a></li>
-        <li><a>¿Porque InvDoc?</a></li>
+        <li><a [routerLink]="['/inicio']">Inicio</a></li>
+        <li><a [routerLink]="['']">¿Porque InvDoc?</a></li>
         <li><a>Contactanos</a></li>
       </ul>
     </nav>
     <div class="div-buttons">
-      <input type="button" value="Registro" />
-      <input type="button" value="Login" />
+        <a [routerLink]="['/registro']">Registro</a>
+        <a [routerLink]="['/login']">Login</a>
+      <!--<input type="button" value="Registro" />
+      <input type="button" value="Login" />-->
     </div>
     <div class="hd-img-menu" (click)="toggleMenu($event)" #menuIcon>
       <img src="../../../assets/menu.png" />

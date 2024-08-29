@@ -1,1 +1,30 @@
-<p>registro works!</p>
+<div class="div-contenedor">
+    <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="nombre">Nombre</label>
+          <input id="nombre" formControlName="nombre" />
+          <div *ngIf="miFormulario.get('nombre').invalid && miFormulario.get('nombre').touched">
+            El nombre es requerido y debe tener al menos 3 caracteres.
+          </div>
+        </div>
+      
+        <div>
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" type="email" />
+          <div *ngIf="miFormulario.get('email').invalid && miFormulario.get('email').touched">
+            Proporcione un email válido.
+          </div>
+        </div>
+      
+        <div>
+          <label for="contraseña">Contraseña</label>
+          <input id="contraseña" formControlName="contraseña" type="password" />
+          <div *ngIf="miFormulario.get('contraseña').invalid && miFormulario.get('contraseña').touched">
+            La contraseña es requerida y debe tener al menos 8 caracteres.
+          </div>
+        </div>
+      
+        <button type="submit" [disabled]="miFormulario.invalid">Enviar</button>
+      </form>
+      
+</div>
