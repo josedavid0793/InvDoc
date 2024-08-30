@@ -19,23 +19,23 @@ use App\Http\Controllers\UsuarioController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/productos',[ProductoController::class,'index']);
-Route::post('/productos',[ProductoController::class,'create']);
-Route::get('/productos/{id}',[ProductoController::class,'show']);
-Route::put('/productos/{id}',[ProductoController::class,'update']);
-Route::delete('/productos/{id}',[ProductoController::class,'destroy']);
+Route::get('/api/productos',[ProductoController::class,'index']);
+Route::post('/api/productos',[ProductoController::class,'create']);
+Route::get('/api/productos/{id}',[ProductoController::class,'show']);
+Route::put('/api/productos/{id}',[ProductoController::class,'update']);
+Route::delete('/api/productos/{id}',[ProductoController::class,'destroy']);
 
-Route::get('/categorias',[CategoriaController::class,'index']);
-Route::post('/categorias',[CategoriaController::class,'store']);
-Route::get('/categorias/{id}',[CategoriaController::class,'show']);
-Route::put('/categorias/{id}',[CategoriaController::class,'update']);
-Route::delete('/categorias/{id}',[CategoriaController::class,'destroy']);
+Route::get('/api/categorias',[CategoriaController::class,'index']);
+Route::post('/api/categorias',[CategoriaController::class,'store']);
+Route::get('/api/categorias/{id}',[CategoriaController::class,'show']);
+Route::put('/api/categorias/{id}',[CategoriaController::class,'update']);
+Route::delete('/api/categorias/{id}',[CategoriaController::class,'destroy']);
 
-Route::get('/usuarios',[UsuarioController::class,'index']);
-Route::post('/usuarios',[UsuarioController::class,'store']);
-Route::get('/usuarios/{id}',[UsuarioController::class,'show']);
-Route::put('/usuarios/{id}',[UsuarioController::class,'update']);
-Route::delete('/usuarios/{id}',[UsuarioController::class,'destroy']);
+Route::get('/api/usuarios',[UsuarioController::class,'index']);
+Route::post('/api/usuarios',[UsuarioController::class,'store']);
+Route::get('/api/usuarios/{id}',[UsuarioController::class,'show']);
+Route::put('/api/usuarios/{id}',[UsuarioController::class,'update']);
+Route::delete('/api/usuarios/{id}',[UsuarioController::class,'destroy']);
 
 
 

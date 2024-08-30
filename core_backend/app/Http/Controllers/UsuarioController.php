@@ -61,7 +61,15 @@ class UsuarioController extends Controller
             $usuario->save();
             return response()->json([
                 'mensaje' => 'Se ha creado el usuario ' . $usuario->nombres,
-                'data' => $usuario
+                'data' => [
+                    'id' => $usuario->id,
+                    'nombres' => $usuario->nombres,
+                    'apellidos' => $usuario->apellidos,
+                    'email' => $usuario->email,
+                    'tipo_documento' => $usuario->tipo_documento,
+                    'numero_documento' => $usuario->numero_documento,
+                    'telefono' => $usuario->telefono,
+                ]
             ], 200, [], JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return response()->json([

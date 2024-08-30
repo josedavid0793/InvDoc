@@ -22,7 +22,7 @@ class UsuarioControllerTest extends TestCase
         TipoDocumento::factory()->count(3)->create();
         Usuario::factory()->count(3)->create();
 
-        $response = $this->get('/usuarios');
+        $response = $this->get('/api/usuarios');
 
         $response->assertStatus(200);
         $responseData = $response->json();
@@ -44,7 +44,7 @@ class UsuarioControllerTest extends TestCase
             'telefono' => 3120000000
         ];
 
-        $response = $this->postJson('/usuarios', $data);
+        $response = $this->postJson('/api/usuarios', $data);
         $response->assertStatus(200)
             ->assertJsonFragment(['mensaje' => 'Se ha creado el usuario usuario nuevo']);
         $this->assertDatabaseHas('usuarios', ['email' => 'usuario@test.com']);
@@ -56,7 +56,7 @@ class UsuarioControllerTest extends TestCase
             'nombres' => '',
             'apellidos' => '',
         ];
-        $response = $this->postJson('/usuarios', $data);
+        $response = $this->postJson('/api/usuarios', $data);
         $response->assertStatus(422)
             ->assertJsonStructure(['error', 'mensaje']);
     }
@@ -75,7 +75,7 @@ class UsuarioControllerTest extends TestCase
             'telefono' => 3120008800
         ];
 
-        $response = $this->postJson('/usuarios', $data);
+        $response = $this->postJson('/api/usuarios', $data);
         $response->assertStatus(500)
             ->assertJsonStructure(['error', 'mensaje']);
     }
@@ -93,7 +93,7 @@ class UsuarioControllerTest extends TestCase
             'telefono' => 3120000000
         ];
 
-        $response = $this->postJson('/usuarios', $data);
+        $response = $this->postJson('/api/usuarios', $data);
         $response->assertStatus(422)
             ->assertJsonStructure(['error', 'mensaje']);
     }
@@ -103,7 +103,7 @@ class UsuarioControllerTest extends TestCase
         TipoDocumento::factory()->create(['codigo' => 'C.C']);
         $usuario = Usuario::factory()->create();
         // Realizar una petición al método show
-        $response = $this->getJson("/usuarios/{$usuario->id}");
+        $response = $this->getJson("/api/usuarios/{$usuario->id}");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -122,7 +122,7 @@ class UsuarioControllerTest extends TestCase
 
     public function test_show_return_usuario_no_existe()
     {
-        $response = $this->getJson('/usuarios/999');
+        $response = $this->getJson('/api/usuarios/999');
         $response->assertStatus(404);
     }
 
@@ -137,7 +137,7 @@ class UsuarioControllerTest extends TestCase
             'numero_documento' => '1030622270',
             'telefono' => 3120008800
         ];
-        $response = $this->putJson("/usuarios/{$usuario->id}",$data);
+        $response = $this->putJson("/api/usuarios/{$usuario->id}",$data);
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['mensaje' => 'Se ha actualizado el usuario usuario actualizado']);
@@ -153,7 +153,7 @@ class UsuarioControllerTest extends TestCase
             'numero_documento' => '1030622270',
             'telefono' => 3120008800
         ];
-        $response = $this->putJson("/usuarios/999",$data);
+        $response = $this->putJson("/api/usuarios/999",$data);
         $response->assertStatus(500);
     }
 
@@ -167,7 +167,7 @@ class UsuarioControllerTest extends TestCase
             'numero_documento' => '1030622270',
             'telefono' => 3120008800
         ];
-        $response = $this->putJson("/usuarios/{$usuario->id}", $data);
+        $response = $this->putJson("/api/usuarios/{$usuario->id}", $data);
         $response->assertStatus(422)
             ->assertJsonStructure(['error', 'mensaje']);
     }
@@ -177,7 +177,7 @@ class UsuarioControllerTest extends TestCase
         TipoDocumento::factory()->create(['codigo' => 'C.C']);
         $usuario = Usuario::factory()->create();
 
-        $response = $this->deleteJson("/usuarios/{$usuario->id}");
+        $response = $this->deleteJson("/api/usuarios/{$usuario->id}");
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['mensaje' => 'Se ha eliminado el usuario ' . $usuario->nombres.' de la base de datos']);
@@ -187,7 +187,7 @@ class UsuarioControllerTest extends TestCase
 
     public function test_destroy_returns_not_found_error()
     {
-        $response = $this->deleteJson('/usuarios/999');
+        $response = $this->deleteJson('/api/usuarios/999');
 
         $response->assertStatus(404);
     }

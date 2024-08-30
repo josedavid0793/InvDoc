@@ -27,7 +27,7 @@ class ProductoControllerTest extends TestCase
         Producto::factory()->count(3)->create();
 
         //act
-        $response = $this->get('/productos');
+        $response = $this->get('/api/productos');
 
         //Asserts
         $response->assertStatus(200);
@@ -50,7 +50,7 @@ class ProductoControllerTest extends TestCase
             'categoria' => 'TestCategoria',
         ];
 
-        $response = $this->postJson('/productos', $data);
+        $response = $this->postJson('/api/productos', $data);
         $response->assertStatus(200)
             ->assertJsonFragment(['mensaje' => 'Se ha creado el producto producto nuevo']);
 
@@ -63,7 +63,7 @@ class ProductoControllerTest extends TestCase
             'precio_unidad' => 'no es un número', // Debería fallar la validación
         ];
 
-        $response = $this->postJson('/productos', $data);
+        $response = $this->postJson('/api/productos', $data);
 
         $response->assertStatus(422)
             ->assertJsonStructure(['error', 'mensaje']);
@@ -87,7 +87,7 @@ class ProductoControllerTest extends TestCase
             'categoria' => 'TestCategoria'
         ];
 
-        $response = $this->postJson('/productos', $data);
+        $response = $this->postJson('/api/productos', $data);
 
         $response->assertStatus(500)
             ->assertJsonStructure(['error', 'mensaje']);
@@ -100,7 +100,7 @@ class ProductoControllerTest extends TestCase
         $producto = Producto::factory()->create();
 
         // Realizar una petición al método show
-        $response = $this->getJson("/productos/{$producto->id}");
+        $response = $this->getJson("/api/productos/{$producto->id}");
 
         // Verificar que la respuesta es exitosa y contiene los datos esperados
         $response->assertStatus(200)
@@ -124,7 +124,7 @@ class ProductoControllerTest extends TestCase
     public function test_show_returns_un_error_cuando_producto_no_existe()
     {
         // Realizar una petición al método show con un ID que no existe
-        $response = $this->getJson('/productos/999');
+        $response = $this->getJson('/api/productos/999');
 
         // Verificar que la respuesta tiene un error 404
         $response->assertStatus(404);
@@ -148,7 +148,7 @@ class ProductoControllerTest extends TestCase
             'categoria' => 'TestCategoria'
         ];
 
-        $response = $this->putJson("/productos/{$producto->id}",$data);
+        $response = $this->putJson("/api/productos/{$producto->id}",$data);
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['mensaje' => 'Se ha actualizado el producto Producto actualizado']);
@@ -168,7 +168,7 @@ class ProductoControllerTest extends TestCase
              'imagen' => 'https://example.com/image.jpg',
              'categoria' => 'TestCategoria'
          ];
-         $response = $this->putJson("/productos/999",$data);
+         $response = $this->putJson("/api/productos/999",$data);
 
         $response->assertStatus(404);
     }
@@ -189,7 +189,7 @@ class ProductoControllerTest extends TestCase
             'categoria' => 'TestCategoria'
         ];
 
-        $response = $this->putJson("/productos/{$producto->id}",$data);
+        $response = $this->putJson("/api/productos/{$producto->id}",$data);
 
         $response->assertStatus(422)
                  ->assertJsonStructure(['error', 'mensaje']);
@@ -200,7 +200,7 @@ class ProductoControllerTest extends TestCase
         $categoria = Categoria::factory()->create();
         $producto = Producto::factory()->create();
 
-        $response = $this->deleteJson("/productos/{$producto->id}");
+        $response = $this->deleteJson("/api/productos/{$producto->id}");
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['mensaje' => 'Se ha eliminado el producto ' . $producto->nombre.' de la base de datos']);
@@ -210,7 +210,7 @@ class ProductoControllerTest extends TestCase
 
     public function test_destroy_returns_not_found_error()
     {
-        $response = $this->deleteJson('/productos/999');
+        $response = $this->deleteJson('/api/productos/999');
 
         $response->assertStatus(404);
     }

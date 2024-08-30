@@ -22,7 +22,7 @@ class CategoriaControllerTest extends TestCase
         Categoria::factory()->count(3)->create();
 
         // Act
-        $response = $this->get('/categorias');
+        $response = $this->get('/api/categorias');
 
         // Assert
         $response->assertStatus(200);
@@ -38,7 +38,7 @@ class CategoriaControllerTest extends TestCase
             'descripcion' => 'Descripción de la nueva categoría',
         ];
 
-        $response = $this->postJson('/categorias', $data);
+        $response = $this->postJson('/api/categorias', $data);
         $response->assertStatus(200)
             ->assertJsonFragment(['mensaje' => 'Se ha creado la categoría Nueva Categoría']);
 
@@ -50,7 +50,7 @@ class CategoriaControllerTest extends TestCase
             'nombre' => '', // Nombre vacío para disparar el error de validación
         ];
 
-        $response = $this->postJson('/categorias', $data);
+        $response = $this->postJson('/api/categorias', $data);
 
         $response->assertStatus(422)
             ->assertJsonStructure(['error', 'mensaje']);
@@ -59,14 +59,14 @@ class CategoriaControllerTest extends TestCase
    public function test_show_returns_especifica_categoria()
     {
         $categoria = Categoria::factory()->create();
-        $response = $this->getJson("/categorias/{$categoria->id}");
+        $response = $this->getJson("/api/categorias/{$categoria->id}");
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['nombre' => $categoria->nombre]);
     }
     public function test_show_returns_not_found_error()
     {
-        $response = $this->getJson('/categorias/999');
+        $response = $this->getJson('/api/categorias/999');
 
         $response->assertStatus(404);
     }
@@ -80,7 +80,7 @@ class CategoriaControllerTest extends TestCase
             'descripcion' => 'Nueva descripción',
         ];
 
-        $response = $this->putJson("/categorias/{$categoria->id}", $data);
+        $response = $this->putJson("/api/categorias/{$categoria->id}", $data);
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['mensaje' => 'Se ha actualizado la categoría Categoría Actualizada']);
@@ -96,7 +96,7 @@ class CategoriaControllerTest extends TestCase
             'nombre' => '', // Nombre vacío para disparar el error de validación
         ];
 
-        $response = $this->putJson("/categorias/{$categoria->id}", $data);
+        $response = $this->putJson("/api/categorias/{$categoria->id}", $data);
 
         $response->assertStatus(422)
                  ->assertJsonStructure(['error', 'mensaje']);
@@ -106,7 +106,7 @@ class CategoriaControllerTest extends TestCase
     {
         $categoria = Categoria::factory()->create();
 
-        $response = $this->deleteJson("/categorias/{$categoria->id}");
+        $response = $this->deleteJson("/api/categorias/{$categoria->id}");
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['mensaje' => 'Se ha eliminado la categoría ' . $categoria->nombre]);
@@ -116,7 +116,7 @@ class CategoriaControllerTest extends TestCase
 
     public function test_destroy_returns_not_found_error()
     {
-        $response = $this->deleteJson('/categorias/999');
+        $response = $this->deleteJson('/api/categorias/999');
 
         $response->assertStatus(500);
     }

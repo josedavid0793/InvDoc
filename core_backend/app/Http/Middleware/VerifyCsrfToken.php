@@ -20,5 +20,9 @@ class VerifyCsrfToken extends Middleware
 
         'usuarios/*',  // Excluir todas las rutas que coincidan con productos/*
         'usuarios',  // Excluir todas las rutas que coincidan con productos/*
+
+        
+        'api/*',  // Excluir todas las rutas que coincidan con productos/*
+        'api',  // Excluir todas las rutas que coincidan con productos/*
     ];
 }
