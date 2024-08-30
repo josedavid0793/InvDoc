@@ -1,119 +1,82 @@
-<div class="div-contenedor">
-    <!--<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
-        <div>
-          <label for="nombre">Nombre</label>
-          <input id="nombre" formControlName="nombres" />
-          <div *ngIf="usuarioForm.get('nombres').invalid && usuarioForm.get('nombres').touched">
-            El nombre es requerido y debe tener al menos 3 caracteres.
-          </div>
-        </div>
-      
-        <div>
-            <label for="nombre">Apellidos</label>
-            <input id="nombre" formControlName="apellidos" />
-            <div *ngIf="usuarioForm.get('apellidos').invalid && usuarioForm.get('apellidos').touched">
-              El nombre es requerido y debe tener al menos 3 caracteres.
-            </div>
-          </div>
-
-        <div>
-          <label for="email">Email</label>
-          <input id="email" formControlName="email" type="email" />
-          <div *ngIf="usuarioForm.get('email').invalid && usuarioForm.get('email').touched">
-            Proporcione un email válido.
-          </div>
-        </div>
-      
-        <div>
-          <label for="contraseña">Contraseña</label>
-          <input id="contraseña" formControlName="contraseña" type="password" />
-          <div *ngIf="usuarioForm.get('contraseña').invalid && usuarioForm.get('contraseña').touched">
-            La contraseña es requerida y debe tener al menos 8 caracteres.
-          </div>
-        </div>
-
-        <div>
-            <label for="contraseña">Confirmar Contraseña</label>
-            <input id="contraseña" formControlName="confirmar_contraseña" type="password" />
-            <div *ngIf="usuarioForm.get('confirmar_contraseña').invalid && usuarioForm.get('confirmar_contraseña').touched">
-              La contraseña es requerida y debe tener al menos 8 caracteres.
-            </div>
-          </div>
-
+<app-navbar></app-navbar>
+<div class="div-principal">
+  <div class="div-contenedor">
+  
+        <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
           <div>
-            <label for="nombre">tipo documento</label>
-            <input id="nombre" formControlName="apellidos" />
-            <div *ngIf="usuarioForm.get('tipo_documento').invalid && usuarioForm.get('tipo_documento').touched">
-              El nombre es requerido y debe tener al menos 3 caracteres.
+            <label for="nombres">Nombres:</label>
+            <input type="text" id="nombres" formControlName="nombres" required>
+            <div *ngIf="usuarioForm.get('nombres').invalid && usuarioForm.get('nombres').touched" class="alert-error">
+              El nombre es requerido y debe tener al menos 4 caracteres.
             </div>
           </div>
-
+        
           <div>
-            <label for="nombre">numero documento</label>
-            <input id="nombre" formControlName="apellidos" />
-            <div *ngIf="usuarioForm.get('numero_documento').invalid && usuarioForm.get('numero_documento').touched">
-              El nombre es requerido y debe tener al menos 3 caracteres.
-            </div>
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" formControlName="apellidos">
           </div>
-
+        
           <div>
-            <label for="nombre">Telefono</label>
-            <input id="nombre" formControlName="apellidos" />
-            <div *ngIf="usuarioForm.get('telefono').invalid && usuarioForm.get('telefono').touched">
-              El nombre es requerido y debe tener al menos 3 caracteres.
+            <label for="email">Email:</label>
+            <input type="email" id="email" formControlName="email">
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage + ' Proporcione un email válido.'}}
             </div>
           </div>
-      
-        <button type="submit" [disabled]="usuarioForm.invalid">Registrarse</button>
-      </form>-->
-
-      <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
-        <div>
-          <label for="nombres">Nombres:</label>
-          <input type="text" id="nombres" formControlName="nombres">
-        </div>
-      
-        <div>
-          <label for="apellidos">Apellidos:</label>
-          <input type="text" id="apellidos" formControlName="apellidos">
-        </div>
-      
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" formControlName="email">
-        </div>
-      
-        <div>
-          <label for="contraseña">Contraseña:</label>
-          <input type="password" id="contraseña" formControlName="contraseña">
-        </div>
-      
-        <div>
-          <label for="confirmar_contraseña">Confirmar Contraseña:</label>
-          <input type="password" id="confirmar_contraseña" formControlName="confirmar_contraseña">
-        </div>
-      
-        <div>
-          <label for="tipo_documento">Tipo de Documento:</label>
-          <select id="tipo_documento" formControlName="tipo_documento">
-            <option value="">Seleccione</option>
-            <option value="dni">DNI</option>
-            <option value="pasaporte">Pasaporte</option>
-            <!-- Agrega más opciones según sea necesario -->
-          </select>
-        </div>
-      
-        <div>
-          <label for="numero_documento">Número de Documento:</label>
-          <input type="text" id="numero_documento" formControlName="numero_documento">
-        </div>
-      
-        <div>
-          <label for="telefono">Teléfono:</label>
-          <input type="tel" id="telefono" formControlName="telefono">
-        </div>
-      
-        <button type="submit" [disabled]="!usuarioForm.valid">Registrar</button>
-      </form>
-      
+        
+          <div>
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" formControlName="contraseña">
+            <div *ngIf="usuarioForm.get('contraseña').invalid && usuarioForm.get('contraseña').touched" class="alert-error">
+              La contraseña es requerida y debe tener al menos 6 caracteres.
+            </div>
+          </div>
+        
+          <div>
+            <label for="confirmar_contraseña">Confirmar Contraseña:</label>
+            <input type="password" id="confirmar_contraseña" formControlName="confirmar_contraseña">
+            <div *ngIf="usuarioForm.get('confirmar_contraseña').invalid && usuarioForm.get('confirmar_contraseña').touched" class="alert-error">
+              La confirmación de contraseña es incorrecta.
+            </div>
+          </div>
+        
+          <div>
+            <label for="tipo_documento">Tipo de Documento:</label>
+            <select id="tipo_documento" formControlName="tipo_documento">
+              <option value="">Seleccione</option>
+              <option value="C.C">C.C</option>
+              <option value="pasaporte">Pasaporte</option>
+              <div *ngIf="usuarioForm.get('tipo_documento').invalid && usuarioForm.get('tipo_documento').touched" class="alert-error">
+                Tipo de Documento es requerido.
+              </div>
+            </select>
+          </div>
+        
+          <div>
+            <label for="numero_documento">Número de Documento:</label>
+            <input type="text" id="numero_documento" formControlName="numero_documento">
+            <div *ngIf="usuarioForm.get('numero_documento').invalid && usuarioForm.get('numero_documento').touched" class="alert-error">
+              Número de Documento es requerido o excede el limite.
+            </div>
+          </div>
+        
+          <div>
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" formControlName="telefono">
+            <div *ngIf="usuarioForm.get('telefono').invalid && usuarioForm.get('telefono').touched" class="alert-error">
+              Telefono es requerido o es incorrecto.
+            </div>
+          </div>
+          <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+  
+          <button type="submit" [disabled]="!usuarioForm.valid">Registrar</button>
+        
+        </form>
+  </div>
+  
 </div>

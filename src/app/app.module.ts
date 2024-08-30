@@ -1,6 +1,9 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { ReactiveFormsModule, FormControl,FormGroup,FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from  '@angular/common/http' ; 
+
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +13,7 @@ import { FooterComponent } from './componentes/footer/footer.component';
 import { InicioComponent } from './paginas/inicio/inicio.component';
 import { RegistroComponent } from './paginas/registro/registro.component';
 import { LoginComponent } from './paginas/login/login.component';
+import { NavbarComponent } from './componentes/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -19,20 +23,20 @@ import { LoginComponent } from './paginas/login/login.component';
     FooterComponent,
     InicioComponent,
     RegistroComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
-    FormControl,
-    FormGroup,
-    FormsModule
-  ],
+    FormsModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule
+    ],
   providers: [
     provideClientHydration()
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+ // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

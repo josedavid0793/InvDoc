@@ -1,99 +1,7 @@
 header {
   background: #fdfefe;
 }
-.div-navbar {
-  align-items: center;
-  background-color: #f8f8f8; /* Color de fondo opcional */
-  box-sizing: border-box;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Añade un sutil sombreado */
-  display: flex;
-  /* flex-wrap: wrap;*/
-  inline-size: 100%; /*mismo width*/
-  inset-block-start: 0;
-  justify-content: space-between;
-  padding: 10px 20px;
-  position: fixed;
-  z-index: 1000; /* Asegura que la barra de navegación esté por encima de otros elementos */
-}
-.logo-img img {
-  block-size: auto; /*mismo height*/
-  max-inline-size: 100px; /* Ajusta el tamaño máximo del logo */ /*mismo max-height*/
-}
 
-nav {
-  flex-basis: 100%;
-  text-align: center;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding: 10px 20px;
-}
-
-.ul-links {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.ul-links li {
-  margin: 0 15px;
-}
-
-.ul-links a {
-  color: #333; /* Color del texto de los enlaces */
-  font-weight: bold;
-  text-decoration: none;
-}
-.ul-links a:hover {
-  cursor: pointer;
-}
-
-.div-buttons {
-  display: flex;
-  gap: 10px; /* Espacio entre los botones */
-}
-
-/*.div-buttons input[type="button"] {
-  background-color: #fff;
-  block-size: 45px;
-  border: 1px solid #ccc;
-  border-radius: 17px;
-  cursor: pointer;
-  font-size: 15px;
-  inline-size: 124px;
-  letter-spacing: 0.4px;
-  padding: 5px 15px;
-}
-
-.div-buttons input[type="button"]:hover {
-  background-color: #e0e0e0; /* Color de fondo al pasar el mouse 
-  cursor: pointer;
-}*/
-.div-buttons a{
-  background-color: #fff;
-  block-size: 25px;
-  border: 1px solid #ccc;
-  border-radius: 17px;
-  color: #000;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 600;
-  inline-size: 100px;
-  letter-spacing: 0.4px;
-  padding: 5px 15px;
-  text-decoration: none;
-  text-align: center;
-}
-.div-buttons a:hover {
-  background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
-  cursor: pointer;
-}
-
-.hd-img-menu {
-  display: none;
-}
 .contenedor-texto {
   display: flex;
   justify-content: center;
@@ -169,48 +77,7 @@ padding-block-start: 80px; /* Añade un margen superior para compensar la altura
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
-  .div-navbar {
-    padding: 10px 10px;
-    flex-wrap: nowrap;
-    block-size: 153px;
-    position: static;
-  }
-  nav {
-    display: none;
-    position: absolute;
-    inset-block-start: 11%;
-    margin-inline-start: 83px;
-  }
-  .ul-links {
-    flex-direction: row;
-    gap: 9px;
-  }
-  .ul-links li {
-    margin: 10px 0;
-  }
-  nav.show-menu {
-    display: block; /* Mostrar el menú cuando menuVisible es true */
-  }
-  .div-buttons {
-    margin-inline-start: auto;
-    margin-inline-end: 50px; /* Espacio para el icono del menú */
-  }
-
-  .div-buttons a {
-    font-size: 12px;
-    inline-size: 80px;
-    block-size: 20px;
-    letter-spacing: 0;
-  }
-  .hd-img-menu {
-    display: block;
-    position: absolute;
-    inset-inline-end: 16px;
-    inset-block-start: 7%;
-    transform: translateY(-50%);
-    block-size: 30px;
-    inline-size: auto;
-  }
+ 
   .contenedor-texto {
     padding: 20px; /* Más espacio alrededor del contenido en pantallas pequeñas */
     block-size: 32vh;

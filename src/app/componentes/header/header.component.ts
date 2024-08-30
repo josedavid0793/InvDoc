@@ -6,10 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  menuVisible: boolean = false;
 
-  toggleMenu(event: MouseEvent) {
-    this.menuVisible = !this.menuVisible;
-    event.stopPropagation(); // Para evitar que el evento se propague al hacer clic
-  }
 }
