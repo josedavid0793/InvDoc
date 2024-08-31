@@ -4,6 +4,9 @@
   
         <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
           <div>
+            <h2>¡Crea tu cuenta muy rápidamente!</h2>
+          </div>
+          <div>
             <label for="nombres">Nombres:</label>
             <input type="text" id="nombres" formControlName="nombres" required>
             <div *ngIf="usuarioForm.get('nombres').invalid && usuarioForm.get('nombres').touched" class="alert-error">
@@ -80,3 +83,4 @@
   </div>
   
 </div>
+<app-footer></app-footer>

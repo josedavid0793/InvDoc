@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuariosService {
-  private apiUrl = 'http://127.0.0.1:8000/api/usuarios';
+  private apiUrl = 'http://127.0.0.1:8000/api/usuarios/registro';
   constructor(private http: HttpClient) { }
   crearUsuario(usuario: any): Observable<any> {
     return this.http.post(this.apiUrl, usuario).pipe(

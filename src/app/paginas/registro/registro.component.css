@@ -1,16 +1,14 @@
 .div-principal {
-  margin-block-start: 50px;
-  block-size: 100vh;
+  margin-block-start: 126px;
+  block-size: 100%;
   padding: 20px 20px;
 }
 .div-contenedor {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-block-size: 100vh;
   padding: 20px;
-  box-sizing: border-box;
-  margin-block-start: 100px;
+  margin-block-start: 0;
 }
 form {
   background-color: #f9f9f9;
@@ -19,6 +17,7 @@ form {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   inline-size: 100%;
   max-inline-size: 500px;
+  margin-block-end: 5%;
 }
 form div {
   margin-block-end: 15px;
