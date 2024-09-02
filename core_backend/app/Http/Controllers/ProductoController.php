@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Events\ProductoAgregado;
+use Illuminate\Http\JsonResponse;
+
 
 class ProductoController extends Controller
 {
@@ -37,13 +40,13 @@ class ProductoController extends Controller
             'categoria' => 'nullable|string|max:100',
         ];
 
-        $validador = Validator::make($request->all(),$reglas);
+        $validador = Validator::make($request->all(), $reglas);
 
         if ($validador->fails()) {
             return response()->json([
                 'error' => 'Ha ocurrido un error al validar los datos enviados',
                 'mensaje' => $validador->errors()
-            ],422);
+            ], 422);
         }
 
         try {
@@ -57,17 +60,20 @@ class ProductoController extends Controller
             $producto->imagen = $request->imagen;
             $producto->categoria = $request->categoria;
             $producto->save();
+
+            // Emitir evento cuando se agrega un producto
+        event(new ProductoAgregado($producto));
+
             return response()->json([
                 'mensaje' => 'Se ha creado el producto ' . $producto->nombre,
                 'data' => $producto
-            ],200,[],JSON_UNESCAPED_UNICODE);
+            ], 200, [], JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Ha ocurrido un error al agregar el producto en la base de datos',
                 'mensaje' => $e->getMessage()
-            ],500);
+            ], 500);
         }
-
     }
 
     /**
@@ -89,17 +95,17 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $producto=Producto::findOrFail($id);
+        $producto = Producto::findOrFail($id);
         try {
             return response()->json([
                 'mensaje' => 'Se consulto el producto ' . $producto->nombre . ' de la base de datos',
                 'data' => $producto
-            ],200,[],JSON_UNESCAPED_UNICODE);
+            ], 200, [], JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'No se obtuvo el producto solicitado',
                 'mensaje' => $e->getMessage()
-            ],404);
+            ], 404);
         }
     }
 
@@ -109,10 +115,7 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
-    {
-
-    }
+    public function edit(Producto $producto) {}
 
     /**
      * Update the specified resource in storage.
@@ -134,13 +137,13 @@ class ProductoController extends Controller
             'categoria' => 'nullable|string|max:100',
         ];
 
-        $validador = Validator::make($request->all(),$reglas);
+        $validador = Validator::make($request->all(), $reglas);
 
         if ($validador->fails()) {
             return response()->json([
                 'error' => 'Ha ocurrido un error al validar los datos enviados',
                 'mensaje' => $validador->errors()
-            ],422);
+            ], 422);
         }
         try {
             $producto = Producto::findOrFail($id);
@@ -156,14 +159,13 @@ class ProductoController extends Controller
             return response()->json([
                 'mensaje' => 'Se ha actualizado el producto ' . $producto->nombre,
                 'data' => $producto
-            ],200,[],JSON_UNESCAPED_UNICODE);
+            ], 200, [], JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Ha ocurrido un error al actualizar el producto en la base de datos',
                 'mensaje' => $e->getMessage()
-            ],404);
+            ], 404);
         }
-
     }
 
     /**
@@ -175,17 +177,39 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         try {
-            $producto=Producto::findOrFail($id);
+            $producto = Producto::findOrFail($id);
             $producto->delete();
             return response()->json([
                 'mensaje' => 'Se ha eliminado el producto ' . $producto->nombre . ' de la base de datos',
                 'data' => $producto
-            ],200,[],JSON_UNESCAPED_UNICODE);
+            ], 200, [], JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'No se elimino el producto deseado',
                 'mensaje' => $e->getMessage()
-            ],404);
+            ], 404);
         }
+    }
+
+    public function contarProductos()
+    {
+        // Contar el total de productos
+        $totalProductos = Producto::count();
+
+        // Devolver el resultado como respuesta JSON
+        return response()->json([
+            'total' => $totalProductos
+        ]);
+    }
+
+     /**
+     * Obtener el costo total de todos los productos.
+     *
+     * @return JsonResponse
+     */
+    public function obtenerCostoTotal(): JsonResponse
+    {
+        $costoTotal = Producto::calcularCostoTotal();
+        return response()->json(['costo_total' => $costoTotal]);
     }
 }

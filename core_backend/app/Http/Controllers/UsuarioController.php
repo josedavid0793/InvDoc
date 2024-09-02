@@ -33,8 +33,7 @@ class UsuarioController extends Controller
             'nombres' => 'required|string|max:200',
             'apellidos' => 'nullable|string|max:250',
             'email' => 'required|string|email:rfc,dns|max:300',
-            'contraseña' => 'required|string|max:500',
-            'confirmar_contraseña' => 'required|string|max:500|same:contraseña',
+            'password' => 'required|string|min:8',
             'tipo_documento' => 'required|string',
             'numero_documento' => 'required|string',
             'telefono' => 'required|numeric',
@@ -49,12 +48,17 @@ class UsuarioController extends Controller
         }
 
         try {
+            // Verificar si el correo electrónico ya existe
+            if (Usuario::where('email', $request->email)->exists()) {
+                return response()->json([
+                    'error' => 'Ya existe un usuario con ese correo electrónico',
+                ], 422);
+            }
             $usuario = new Usuario();
             $usuario->nombres = $request->nombres;
             $usuario->apellidos = $request->apellidos;
             $usuario->email = $request->email;
-            $usuario->contraseña = Hash::make($request->contraseña);
-            $usuario->confirmar_contraseña = Hash::make($request->confirmar_contraseña);
+            $usuario->password = Hash::make($request->password);
             $usuario->tipo_documento = $request->tipo_documento;
             $usuario->numero_documento = $request->numero_documento;
             $usuario->telefono = $request->telefono;
@@ -114,8 +118,8 @@ class UsuarioController extends Controller
             'nombres' => 'required|string|max:200',
             'apellidos' => 'nullable|string|max:250',
             'email' => 'required|string|max:300|email',
-            'contraseña' => 'required|string|max:500',
-            'confirmar_contraseña' => 'required|string|max:500|same:contraseña',
+            'password' => 'required|string|max:500',
+            'confirmar_password' => 'required|string|max:500|same:contraseña',
             'tipo_documento' => 'required|string',
             'numero_documento' => 'required|string',
             'telefono' => 'required|numeric',
@@ -134,15 +138,23 @@ class UsuarioController extends Controller
             $usuario->nombres = $request->nombres;
             $usuario->apellidos = $request->apellidos;
             $usuario->email = $request->email;
-            $usuario->contraseña = Hash::make($request->contraseña);
-            $usuario->confirmar_contraseña = Hash::make($request->confirmar_contraseña);
+            $usuario->password = Hash::make($request->contraseña);
+            $usuario->confirmar_password = Hash::make($request->confirmar_contraseña);
             $usuario->tipo_documento = $request->tipo_documento;
             $usuario->numero_documento = $request->numero_documento;
             $usuario->telefono = $request->telefono;
             $usuario->save();
             return response()->json([
                 'mensaje' => 'Se ha actualizado el usuario ' . $usuario->nombres,
-                'data' => $usuario
+                'data' => [
+                    'id' => $usuario->id,
+                    'nombres' => $usuario->nombres,
+                    'apellidos' => $usuario->apellidos,
+                    'email' => $usuario->email,
+                    'tipo_documento' => $usuario->tipo_documento,
+                    'numero_documento' => $usuario->numero_documento,
+                    'telefono' => $usuario->telefono,
+                ]
             ], 200, [], JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return response()->json([

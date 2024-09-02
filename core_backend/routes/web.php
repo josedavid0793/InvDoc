@@ -1,40 +1,42 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AuthController;
 
 
 
+
+// Rutas públicas
+
+Route::post('logout', [AuthController::class, 'logout']);
+Route::post('refresh', [AuthController::class, 'refresh']);
+Route::get('me', [AuthController::class, 'me']);
+
+// Rutas de Productos
+//Route::apiResource('productos', ProductoController::class);
+Route::get('/productos', [ProductoController::class, 'index']);
+Route::post('/productos', [ProductoController::class, 'create']);
+Route::get('/productos/contar', [ProductoController::class, 'contarProductos']);
+Route::get('/productos/costo-total', [ProductoController::class, 'obtenerCostoTotal']);
+
+
+
+// Rutas de Categorías
+Route::apiResource('categorias', CategoriaController::class);
+
+// Rutas de Usuarios (excepto registro)
+Route::apiResource('usuarios', UsuarioController::class)->except(['store']);
+Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('usuarios/registro', [UsuarioController::class, 'store']);
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+// Rutas protegidas
+Route::group(['middleware' => 'auth:sanctum'], function () {
+
+});
+
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/api/productos',[ProductoController::class,'index']);
-Route::post('/api/productos',[ProductoController::class,'create']);
-Route::get('/api/productos/{id}',[ProductoController::class,'show']);
-Route::put('/api/productos/{id}',[ProductoController::class,'update']);
-Route::delete('/api/productos/{id}',[ProductoController::class,'destroy']);
-
-Route::get('/api/categorias',[CategoriaController::class,'index']);
-Route::post('/api/categorias',[CategoriaController::class,'store']);
-Route::get('/api/categorias/{id}',[CategoriaController::class,'show']);
-Route::put('/api/categorias/{id}',[CategoriaController::class,'update']);
-Route::delete('/api/categorias/{id}',[CategoriaController::class,'destroy']);
-
-Route::get('/api/usuarios',[UsuarioController::class,'index']);
-Route::post('/api/usuarios',[UsuarioController::class,'store']);
-Route::get('/api/usuarios/{id}',[UsuarioController::class,'show']);
-Route::put('/api/usuarios/{id}',[UsuarioController::class,'update']);
-Route::delete('/api/usuarios/{id}',[UsuarioController::class,'destroy']);

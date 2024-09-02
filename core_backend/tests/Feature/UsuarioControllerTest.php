@@ -39,6 +39,8 @@ class UsuarioControllerTest extends TestCase
             'nombres' => 'usuario nuevo',
             'apellidos' => 'prueba',
             'email' => 'usuario@test.com',
+            'password' => 'password',
+            'confirmar_password' => 'password',
             'tipo_documento' => 'C.C',
             'numero_documento' => '1030622270',
             'telefono' => 3120000000
@@ -70,6 +72,8 @@ class UsuarioControllerTest extends TestCase
             'nombres' => 'usuario nuevo',
             'apellidos' => 'prueba',
             'email' => 'usuarioexistente@gmail.com',
+            'password' => 'password',
+            'confirmar_password' => 'password',
             'tipo_documento' => 'C.C',
             'numero_documento' => '1030622270',
             'telefono' => 3120008800
@@ -88,6 +92,8 @@ class UsuarioControllerTest extends TestCase
             'nombres' => 'Jose David',
             'apellidos' => 'Quintero',
             'email' => 'email@invalido',
+            'password' => 'password',
+            'confirmar_password' => 'password',
             'tipo_documento' => 'C.C',
             'numero_documento' => '1030622270',
             'telefono' => 3120000000
@@ -96,6 +102,27 @@ class UsuarioControllerTest extends TestCase
         $response = $this->postJson('/api/usuarios', $data);
         $response->assertStatus(422)
             ->assertJsonStructure(['error', 'mensaje']);
+    }
+
+    public function test_Usuario_Registro_confirmar_contraseña()
+    {
+        $userData = Usuario::factory()->make()->toArray();
+        $password = $userData['confirmar_password']; // Guarda la contraseña sin encriptar
+        
+        unset($userData['confirmar_password']); // Elimina este campo ya que no se envía al controlador
+
+        $response = $this->postJson('/api/usuario', array_merge($userData, [
+            'password' => $password,
+            'confirmar_password' => $password
+        ]));
+
+        $response->assertStatus(200)
+                 ->assertJsonStructure(['message']);
+
+        $this->assertDatabaseHas('usuarios', [
+            'email' => $userData['email'],
+            'numero_documento' => $userData['numero_documento']
+        ]);
     }
 
     public function test_show_return_todos_usuarios()
@@ -133,6 +160,8 @@ class UsuarioControllerTest extends TestCase
             'nombres' => 'usuario actualizado',
             'apellidos' => 'prueba',
             'email' => 'usuarioexistente@gmail.com',
+            'password' => 'password',
+            'confirmar_password' => 'password',
             'tipo_documento' => 'C.C',
             'numero_documento' => '1030622270',
             'telefono' => 3120008800
@@ -149,6 +178,8 @@ class UsuarioControllerTest extends TestCase
             'nombres' => 'usuario actualizado',
             'apellidos' => 'prueba',
             'email' => 'usuarioexistente@gmail.com',
+            'password' => 'password',
+            'confirmar_password' => 'password',
             'tipo_documento' => 'C.C',
             'numero_documento' => '1030622270',
             'telefono' => 3120008800

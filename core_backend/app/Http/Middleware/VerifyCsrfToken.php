@@ -12,7 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'productos/*',  // Excluir todas las rutas que coincidan con productos/*
+        /*'productos/*',  // Excluir todas las rutas que coincidan con productos/*
         'productos',  // Excluir todas las rutas que coincidan con productos/*
 
         'categorias/*',  // Excluir todas las rutas que coincidan con productos/*
@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
 
         
         'api/*',  // Excluir todas las rutas que coincidan con productos/*
-        'api',  // Excluir todas las rutas que coincidan con productos/*
+        'api',  // Excluir todas las rutas que coincidan con productos/** 
+        */
     ];
 }
