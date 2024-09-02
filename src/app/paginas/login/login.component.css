@@ -1,0 +1,90 @@
+.div-principal {
+    margin-block-start: 126px;
+    block-size: 100%;
+    padding: 20px 20px;
+  }
+  .div-contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-block-start: 0;
+  }
+  form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    inline-size: 100%;
+    max-inline-size: 500px;
+    margin-block-end: 5%;
+  }
+  form div {
+    margin-block-end: 15px;
+  }
+  label {
+    display: block;
+    margin-block-end: 5px;
+    font-weight: bold;
+  }
+  input,
+  select {
+    inline-size: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    inline-size: 100%;
+    font-size: larger;
+  }
+  button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+  }
+  .alert {
+    margin-block-start: 10px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .alert-danger,
+  .alert-error {
+    color: red;
+    font-weight: 600;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  @media (max-width: 600px) {
+    .div-principal {
+      margin-block-start: 0px;
+      padding: 5px 20px;
+    }
+    .div-contenedor {
+      min-block-size: 80vh;
+      padding: 12px;
+      margin-block-start: 0px;
+    }
+    form {
+      padding: 15px;
+      inline-size: 100%;
+    }
+  
+    button {
+      inline-size: 100%;
+      font-size: medium;
+    }
+  }
+  

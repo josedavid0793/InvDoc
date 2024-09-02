@@ -14,6 +14,7 @@ import { InicioComponent } from './paginas/inicio/inicio.component';
 import { RegistroComponent } from './paginas/registro/registro.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
+import { InventarioComponent } from './paginas/inventario/inventario.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
     InicioComponent,
     RegistroComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    InventarioComponent
   ],
   imports: [
     ReactiveFormsModule,

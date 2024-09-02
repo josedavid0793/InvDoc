@@ -1,1 +1,39 @@
-<p>login works!</p>
+<app-navbar></app-navbar>
+<div class="div-principal">
+    <div class="div-contenedor">
+    
+          <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+            <div>
+              <h2>¡Accede a tú cuenta!</h2>
+            </div>
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" id="email" formControlName="email">
+              <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage + ' Proporcione un email válido.'}}
+              </div>
+            </div>
+          
+            <div>
+              <label for="contraseña">Contraseña:</label>
+              <input type="password" id="contraseña" formControlName="contraseña">
+              <div *ngIf="usuarioForm.get('contraseña').invalid && usuarioForm.get('contraseña').touched" class="alert-error">
+                La contraseña es requerida y debe tener al menos 6 caracteres.
+              </div>
+            </div>
+          
+           
+            <div *ngIf="successMessage" class="alert alert-success">
+              {{ successMessage }}
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+    
+            <button type="submit" [disabled]="!usuarioForm.valid">Ingreso</button>
+          
+          </form>
+    </div>
+    
+  </div>
+<app-footer></app-footer>

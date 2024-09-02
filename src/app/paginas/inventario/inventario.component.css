@@ -1,0 +1,44 @@
+.container-sup {
+    margin-block-start: 126px;
+    block-size: 100%;
+    padding: 20px 20px;
+  }
+  .div-dashboard{
+    background: brown;
+    block-size: 50vh;
+    display: flex;
+    inline-size: 100%;
+    justify-content: space-around;
+  }
+  .div-ref{
+    background: #fff;
+    block-size: 150px;
+    inline-size: 40%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 17px;
+    margin-block-start: 10px;
+    padding: 10px 10px;
+  }
+  .div-total{
+    background: #fff;
+    block-size: 150px;
+    inline-size: 40%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 17px;
+    margin-block-start: 10px;
+    padding: 10px 10px;
+  }
+  h3{
+    font: caption;
+    font-size: 24px;
+  }
+  p{
+    font-size: 20px;
+    font-weight: 600;
+  }
