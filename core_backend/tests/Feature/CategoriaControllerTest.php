@@ -38,7 +38,7 @@ class CategoriaControllerTest extends TestCase
             'descripcion' => 'Descripción de la nueva categoría',
         ];
 
-        $response = $this->postJson('/api/categorias', $data);
+        $response = $this->postJson('/api/categorias/crear', $data);
         $response->assertStatus(200)
             ->assertJsonFragment(['mensaje' => 'Se ha creado la categoría Nueva Categoría']);
 
@@ -50,7 +50,7 @@ class CategoriaControllerTest extends TestCase
             'nombre' => '', // Nombre vacío para disparar el error de validación
         ];
 
-        $response = $this->postJson('/api/categorias', $data);
+        $response = $this->postJson('/api/categorias/crear', $data);
 
         $response->assertStatus(422)
             ->assertJsonStructure(['error', 'mensaje']);

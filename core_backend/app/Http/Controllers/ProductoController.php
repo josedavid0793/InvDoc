@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Events\ProductoAgregado;
 use Illuminate\Http\JsonResponse;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use App\Exports\ProductosExport;
+
+
 
 
 class ProductoController extends Controller
@@ -211,5 +216,27 @@ class ProductoController extends Controller
     {
         $costoTotal = Producto::calcularCostoTotal();
         return response()->json(['costo_total' => $costoTotal]);
+    }
+
+   /* public function exportExcel()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+    }*/
+
+    public function exportPdf()
+    {
+       $productos = Producto::all();
+
+        $pdf = PDF::loadView('productos.pdf',compact('productos'));
+        return $pdf->download('productos.pdf');
+    }
+
+    public function exportExcel()
+    {
+        $productosExport = new ProductosExport();
+        $filePath = $productosExport->export();
+
+        // Retorna el archivo Excel para descargar
+        return Response::download($filePath)->deleteFileAfterSend(true);
     }
 }
