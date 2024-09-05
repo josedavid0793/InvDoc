@@ -15,6 +15,9 @@ import { RegistroComponent } from './paginas/registro/registro.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { InventarioComponent } from './paginas/inventario/inventario.component';
+import { CrearproductoComponent } from './componentes/crearproducto/crearproducto.component';
+import { CrearcategoriaComponent } from './componentes/crearcategoria/crearcategoria.component';
+import { ExpinventarioComponent } from './componentes/expinventario/expinventario.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { InventarioComponent } from './paginas/inventario/inventario.component';
     RegistroComponent,
     LoginComponent,
     NavbarComponent,
-    InventarioComponent
+    InventarioComponent,
+    CrearproductoComponent,
+    CrearcategoriaComponent,
+    ExpinventarioComponent
   ],
   imports: [
     ReactiveFormsModule,

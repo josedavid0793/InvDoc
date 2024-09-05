@@ -5,21 +5,25 @@ import Pusher from 'pusher-js';
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
-  styleUrl: './inventario.component.css'
+  styleUrl: './inventario.component.css',
 })
 export class InventarioComponent implements OnInit, OnDestroy {
   totalProductos: number = 0;
   costoTotal: number = 0;
   private pusher: Pusher;
   private channel: any;
+  isCrearCategoriaVisible: boolean = false;
+  isCrearProductoVisible: boolean = false;
+  isExpInventario: boolean = false;
 
-  constructor(private productoService: ProductosService) { 
+
+  constructor(private productoService: ProductosService) {
     this.pusher = new Pusher('1858994', {
-      cluster: 'us2'
+      cluster: 'us2',
     });
   }
   ngOnInit(): void {
-    this.productoService.obtenerCostoTotal().subscribe(data => {
+    this.productoService.obtenerCostoTotal().subscribe((data) => {
       this.costoTotal = data.costo_total;
     });
     this.fetchTotalProductos();
@@ -42,14 +46,39 @@ export class InventarioComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error('Error al obtener el total de productos', error);
-      }
+      },
     });
   }
 
-    initializePusher() {
-      this.channel = this.pusher.subscribe('productos');
-      this.channel.bind('ProductoAgregado', (data: any) => {
-        this.fetchTotalProductos();
-      });
-    }
+  initializePusher() {
+    this.channel = this.pusher.subscribe('productos');
+    this.channel.bind('ProductoAgregado', (data: any) => {
+      this.fetchTotalProductos();
+    });
+  }
+ /* cerrarCrearProducto() {
+    this.mostrarCrearProducto = false;
+  }*/
+  onCloseCrearProducto() {
+    this.isCrearProductoVisible = false;
+  }
+
+  onOpenCrearProducto() {
+    this.isCrearProductoVisible = true;
+  }
+
+  onCloseCrearCategoria() {
+    this.isCrearCategoriaVisible = false;
+  }
+
+  onOpenCrearCategoria() {
+    this.isCrearCategoriaVisible = true;
+  }
+
+  onOpenExpInventario() {
+    this.isExpInventario = true;
+  }
+  onCloseExpInventario() {
+    this.isExpInventario = false;
+  }
 }

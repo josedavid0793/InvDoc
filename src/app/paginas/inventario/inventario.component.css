@@ -1,44 +1,196 @@
 .container-sup {
-    margin-block-start: 126px;
-    block-size: 100%;
-    padding: 20px 20px;
+  block-size: 100%;
+  margin-block-start: 126px;
+  padding: 20px 20px;
+}
+.div-dashboard {
+  background: #aed6f1;
+  block-size: 40vh;
+  display: flex;
+  inline-size: 100%;
+  justify-content: space-around;
+}
+
+.div-total,
+.div-ref {
+  background: #fff;
+  block-size: 150px;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+  inline-size: 40%;
+  justify-content: center;
+  margin-block-start: 10px;
+  padding: 10px 10px;
+  text-align: center;
+}
+h3 {
+  font: caption;
+  font-size: 20px;
+}
+p {
+  color: black;
+  font: caption;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.div-opcion {
+  background:#f2f3f4;
+  block-size: 50vh;
+  border-start-start-radius: 48px;
+  border-start-end-radius: 48px;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  justify-content: flex-start;
+}
+.div-option-1 {
+  block-size: 13vh;
+  display: flex;
+  justify-content: normal;
+}
+.option-button {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  inline-size: 50%;
+  justify-content: center;
+}
+.option-button button i {
+  margin-inline-end: 5px;
+}
+.button1 {
+  background: #229954;
+  block-size: 47px;
+  border: 1px solid gray;
+  border-radius: 40px;
+  color: #fff;
+  font-size: 11px;
+  inline-size: 29%;
+  padding: 8px 8px;
+  text-transform: uppercase;
+}
+.button1:hover{
+  cursor: pointer;
+  background: #52be80;
+}
+/*.option-descarga{
+  align-items: center;
+  display: flex;
+  inline-size: 10%;
+  justify-content: center;
+}*/
+.button2 {
+  background: #f4f6f7;
+  block-size: 47px;
+  border: 1px solid gray;
+  border-radius: 40px;
+  color: #000;
+  font-size: 11px;
+  inline-size: 33%;
+  padding: 8px 8px;
+  text-transform: uppercase;
+}
+.button2:hover{
+  cursor: pointer;
+}
+.option-buscar{
+  align-items: center;
+  display: flex;
+  inline-size: 50%;
+  justify-content: center;
+}
+.div-option-2{
+  background: blueviolet;
+  block-size: 13vh;
+  display: flex;
+  justify-content: space-between;
+}
+.input-button-search {
+  block-size: 42px;
+  border: 1px solid #fff; /*borrar borde del boton*/
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  font-size: 16px;
+  inline-size: 70%;
+  padding: 14px;
+  outline: none; /* Eliminar el contorno */
+}
+.input-button-search input[type="search"]:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra más intensa al enfocarse */
+}
+.crear-producto-overlay {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.crear-producto-overlay app-crearproducto {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 600px) {
+  .container-sup {
+    margin-block-start: 30px;
+    padding: 10px 10px;
   }
-  .div-dashboard{
-    background: brown;
-    block-size: 50vh;
+  .div-dashboard {
+    block-size: 20vh;
+  }
+  .div-ref,
+  .div-total {
+    block-size: 65px;
+    padding: 5px 5px;
+  }
+  h3 {
+    font-size: 14px;
+  }
+  p {
+    font-size: 16px;
+  }
+  .div-option-1{
+    block-size: 16vh;
     display: flex;
+    flex-flow: column-reverse;
+  }
+  .option-buscar{
+    inline-size: 97%;
+  }
+  .input-button-search{
+    block-size: 37px;
+    inline-size: 80%;
+  }
+  /* Ocultar el texto y dejar solo el ícono en pantallas pequeñas */
+  .option-button button .text {
+    display: none;
+  }
+  /* Centrar el ícono cuando el texto no está presente */
+  .option-button button i {
+    margin-inline-end: 0;
+    display: block;
     inline-size: 100%;
-    justify-content: space-around;
-  }
-  .div-ref{
-    background: #fff;
-    block-size: 150px;
-    inline-size: 40%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     text-align: center;
-    border-radius: 17px;
-    margin-block-start: 10px;
-    padding: 10px 10px;
   }
-  .div-total{
-    background: #fff;
-    block-size: 150px;
-    inline-size: 40%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    border-radius: 17px;
-    margin-block-start: 10px;
-    padding: 10px 10px;
+  .option-button{
+    gap: 25px;
+    inline-size: 100%;
+    margin-block-start: 5px;
+    margin-block-end: 5px;
   }
-  h3{
-    font: caption;
-    font-size: 24px;
+  .button1,.button2{
+    block-size: 45px;
+    inline-size: 45px;
+    border-radius: 65px;
+    border: 1px solid #000;
   }
-  p{
-    font-size: 20px;
-    font-weight: 600;
-  }
+}

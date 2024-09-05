@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { Observable,throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +16,41 @@ export class ProductosService {
   }
   obtenerCostoTotal(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}productos/costo-total`);
+  }
+  obtenerCategorias():Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}categorias`).pipe(
+      map(response => response[0]));
+  }
+  crearProducto(producto:any):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}productos/crear`,producto).pipe(
+      catchError(this.handleError)
+    );
+  }
+  crearCategoria(categoria:any):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}categorias/crear`,categoria).pipe(
+      catchError(this.handleError)
+    );
+  }
+  exportarPdf() {
+    return this.http.get(`${this.apiUrl}productos/export/pdf`, {
+      responseType: 'blob',
+    });
+  }
+  exportarExcel() {
+    return this.http.get(`${this.apiUrl}productos/export/excel`, {
+      responseType: 'blob',
+    });
+  }
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocurrió un error desconocido';
+    if (error.error instanceof ErrorEvent) {
+      // Error del lado del cliente
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // El backend retornó un código de error
+      errorMessage = error.error.error || `Código de error: ${error.status}, mensaje: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

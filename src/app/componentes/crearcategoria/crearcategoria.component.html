@@ -1,0 +1,52 @@
+<div class="div-principal">
+  <div class="div-contenedor">
+    <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()">
+      <div class="div-form1">
+        <h2>Agregar Categoría</h2>
+      </div>
+      <div class="div-form2">
+        <div class="div-wrap2">
+          <label for="nombre" class="div-label">Nombre</label>
+          <input
+            class="input-form"
+            type="text"
+            placeholder="Nombre categoría"
+            id="nombre"
+            formControlName="nombre"
+            required
+          />
+          <div
+            *ngIf="
+              categoriaForm.get('nombre').invalid &&
+              categoriaForm.get('nombre').touched
+            "
+            class="alert-error"
+          >
+            El nombre es requerido y debe tener al menos 2 caracteres.
+          </div>
+        </div>
+        <div class="div-wrap4">
+          <label for="descripcion" class="div-label">Descripcion</label>
+          <textarea
+            class="text-form"
+            placeholder="Descripcion (Opcional)"
+            id="descripcion"
+            formControlName="descripcion"
+          ></textarea>
+        </div>
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+      <div class="div-button">
+        <button class="button-1" type="submit" [disabled]="!categoriaForm.valid">Agregar</button>
+        <button class="button-2" type="button" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

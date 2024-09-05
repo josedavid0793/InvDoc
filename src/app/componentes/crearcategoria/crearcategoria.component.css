@@ -1,0 +1,148 @@
+.div-principal {
+  align-items: center;
+  block-size: 100%;
+  display: flex;
+  inline-size: 100%;
+  justify-content: center;
+}
+.div-contenedor {
+  display: flex;
+  justify-content: center;
+}
+form {
+  background-color: #f9f9f9;
+  block-size: 70vh;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  inline-size: 100%;
+  max-inline-size: 50%;
+  padding: 20px;
+}
+.div-label {
+  color: #000;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-block-end: 1px;
+}
+.input-form {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+  inline-size: 95%;
+  padding: 8px;
+}
+.button-1 {
+  background-color: #007bff;
+  block-size: 50px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  inline-size: 220px;
+  font-size: larger;
+  padding: 10px 15px;
+}
+.button1:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+.button-2 {
+  background-color: #95a5a6;
+  block-size: 50px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  inline-size: 220px;
+  font-size: larger;
+  padding: 10px 15px;
+}
+.button2:hover {
+  background-color: #bfc9ca;
+  cursor: pointer;
+}
+.div-form1 {
+  align-items: center;
+  block-size: 10%;
+  display: flex;
+  inline-size: 100%;
+  justify-content: center;
+}
+h2 {
+  font: caption;
+  font-weight: 600;
+  font-size: 29px;
+  padding: 10px 10px;
+}
+.div-form2 {
+  block-size: 50%;
+  display: flex;
+  justify-content: space-between;
+  inline-size: 100%;
+  flex-direction: column;
+}
+.div-wrap2 {
+  display: flex;
+  block-size: 50%;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+.input-form::placeholder {
+  color: #888; /* Color del texto del placeholder */
+  font-style: italic; /* Estilo de fuente */
+  opacity: 1; /* Asegura que el placeholder sea completamente visible */
+  font: caption;
+}
+.div-wrap4 {
+  align-content: space-around;
+  block-size: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  inline-size: 100%;
+}
+.text-form {
+  block-size: 80%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+  inline-size: 98%;
+  padding: 8px;
+}
+.text-form::placeholder {
+  color: #888; /* Color del texto del placeholder */
+  font-style: italic; /* Estilo de fuente */
+  opacity: 1; /* Asegura que el placeholder sea completamente visible */
+  font-size: 14px; /* Tamaño de fuente */
+}
+.div-button {
+  display: flex;
+  justify-content: space-between;
+  inline-size: 100%;
+}
+.alert {
+  margin-block-start: 10px;
+  padding: 10px;
+  border-radius: 4px;
+}
+.alert-danger,
+.alert-error {
+  color: red;
+  font-weight: 600;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+@media (max-width: 600px) {
+  form {
+    block-size: 50vh;
+    max-inline-size: 60%;
+  }
+  .div-button{
+    gap: 5px;
+  }
+}

@@ -2,14 +2,34 @@
 <div class="container-sup">
   <div class="div-dashboard">
     <div class="div-ref">
-        <h3>Total referencias</h3>
-        <p>{{totalProductos}}</p>
+      <h3>Total de referencias</h3>
+      <p>{{ totalProductos }}</p>
     </div>
     <div class="div-total">
-        <h3>Costo total</h3>
-        <p>{{ costoTotal | currency }}</p>
+      <h3>Costo total</h3>
+      <p>{{ costoTotal | currency }}</p>
     </div>
   </div>
-  <div class="div-total"></div>
+  <div class="div-opcion">
+    <div class="div-option-1">
+      <div class="option-button">
+        <button class="button1" type="button"><i class="fas fa-plus" (click)="onOpenCrearProducto()"></i><span class="text" (click)="onOpenCrearProducto()">Crear Producto</span></button>
+        <button class="button1" type="button"><i class="fas fa-plus" (click)="onOpenCrearCategoria()"></i><span class="text" (click)="onOpenCrearCategoria()">Crear Categoría</span></button>
+        <button class="button2" type="button"><i class="fas fa-download" (click)="onOpenExpInventario()"></i><span class="text" (click)="onOpenExpInventario()">Descargar Reporte</span></button>
+      </div>
+     <!--<div class="option-descarga">
+        <button class="button2" type="button">Descargar Reporte</button>
+      </div>--> 
+      <div class="option-buscar">
+        <input class="input-button-search" type="search" placeholder="Buscar..." />
+      </div>
+    </div>
+    <div class="div-option-2">categorias</div>
+    <div class="div-option-3">tabla productos</div>
+  </div>
+ <!-- Mostrar app-crearproducto cuando mostrarCrearProducto sea true -->
+ <app-crearproducto *ngIf="isCrearProductoVisible" (close)="onCloseCrearProducto()" class="crear-producto-overlay"></app-crearproducto>
+ <app-crearcategoria *ngIf="isCrearCategoriaVisible" (close)="onCloseCrearCategoria()" class="crear-producto-overlay"></app-crearcategoria>
+ <app-expinventario *ngIf="isExpInventario" (close)="onCloseExpInventario()" class="crear-producto-overlay"></app-expinventario>
 </div>
 <app-footer></app-footer>

@@ -1,0 +1,139 @@
+<div class="div-principal">
+  <div class="div-contenedor">
+    <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+      <div class="div-form1">
+        <h2>Agregar Producto</h2>
+      </div>
+      <div class="div-form2">
+        <div class="form2-image">
+          <label for="imagen" class="camera-label"></label>
+          <input
+            class="camera-input"
+            type="file"
+            accept="image/*"
+            capture="camera"
+            (change)="onFileSelected($event)"
+            id="imagen"
+            formControlName="imagen"
+          />
+        </div>
+        <div class="form2-input">
+          <div class="div-wrap">
+            <label for="codigo" class="div-label">Codigo</label>
+            <input
+              class="input-form"
+              type="text"
+              placeholder="Codigo de producto (Opcional)"
+              id="codigo"
+              formControlName="codigo"
+            />
+          </div>
+          <div class="quantity-input">
+            <label for="cantidad_disponible" class="div-label">Cantidad Disponible</label>
+            <div class="input-group">
+              <button type="button" class="btn-minus" (click)="decrement()">
+                -
+              </button>
+              <input
+                name="cantidad"
+                class="input-form no-spinner"
+                id="cantidad_disponible"
+                type="number"
+                [(ngModel)]="cantidad"
+                min="0"
+                (change)="onInputChange()"
+                formControlName="cantidad_disponible"
+              />
+              <button type="button" class="btn-plus" (click)="increment()">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-form3">
+        <div class="div-wrap2">
+          <label for="nombre" class="div-label">Nombre</label>
+          <input
+            class="input-form"
+            type="text"
+            placeholder="Nombre producto"
+            id="nombre"
+            formControlName="nombre"
+            required
+          />
+          <div
+            *ngIf="
+              productoForm.get('nombre').invalid &&
+              productoForm.get('nombre').touched
+            "
+            class="alert-error"
+          >
+            El nombre es requerido y debe tener al menos 2 caracteres.
+          </div>
+        </div>
+        <div class="div-wrap2">
+          <label for="precio_unidad" class="div-label">Precio unitario</label>
+          <input
+            class="input-form no-spinner"
+            type="number"
+            placeholder="Costo venta (Opcional)"
+            id="precio_unidad"
+            formControlName="precio_unidad"
+          />
+        </div>
+        <div class="div-wrap2">
+          <label for="costo_unidad" class="div-label">Costo unitario</label>
+          <input
+            class="input-form no-spinner"
+            type="number"
+            placeholder="Costo compra (Opcional)"
+            id="costo_unidad"
+            formControlName="costo_unidad"
+          />
+        </div>
+      </div>
+
+      <div class="div-form4">
+        <div class="div-wrap3">
+          <label for="categoria" class="div-label">Categoría</label>
+          <select
+            id="categoria"
+            class="custom-select"
+            formControlName="categoria"
+          >
+            <option class="opcion-1" value="" disabled selected>
+              Sin categoría
+            </option>
+            <option *ngFor="let categoria of categorias" [value]="categoria.nombre">
+              {{ categoria.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <div class="div-wrap4">
+          <label for="descripcion" class="div-label">Descripcion</label>
+          <textarea
+            class="text-form"
+            placeholder="Descripcion (Opcional)"
+            id="descripcion"
+            formControlName="descripcion"
+          ></textarea>
+        </div>
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+      <div class="div-button">
+        <button class="button-1" type="submit" [disabled]="!productoForm.valid">Agregar</button>
+        <button class="button-2" type="button" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
