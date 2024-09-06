@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -239,4 +240,20 @@ class ProductoController extends Controller
         // Retorna el archivo Excel para descargar
         return Response::download($filePath)->deleteFileAfterSend(true);
     }
+
+    public function productoPorCategoria($nombreCategoria)
+{
+ // Verifica si existe una categoría con ese nombre
+ $categoria = Categoria::where('nombre', $nombreCategoria)->first();
+
+ if (!$categoria) {
+     return response()->json(['mensaje' => 'Categoría no encontrada'], 404);
+ }
+
+ // Obtén los productos que pertenecen a esa categoría
+ $productos = Producto::where('categoria', $categoria->nombre)->get();
+
+ return response()->json($productos);
+}
+
 }

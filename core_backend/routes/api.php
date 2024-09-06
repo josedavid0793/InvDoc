@@ -22,6 +22,8 @@ Route::get('/productos/contar', [ProductoController::class, 'contarProductos']);
 Route::get('/productos/costo-total', [ProductoController::class, 'obtenerCostoTotal']);
 Route::get('/productos/export/pdf', [ProductoController::class, 'exportPdf']);
 Route::get('/productos/export/excel', [ProductoController::class, 'exportExcel']);
+Route::get('/productos/categoria/{nombreCategoria}', [ProductoController::class, 'productoPorCategoria']);
+
 
 
 
