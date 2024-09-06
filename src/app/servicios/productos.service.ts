@@ -21,6 +21,10 @@ export class ProductosService {
     return this.http.get<any[]>(`${this.apiUrl}categorias`).pipe(
       map(response => response[0]));
   }
+  obtenerProductos():Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}productos`).pipe(
+      map(response => response[0]));
+  }
   crearProducto(producto:any):Observable<any>{
     return this.http.post<any>(`${this.apiUrl}productos/crear`,producto).pipe(
       catchError(this.handleError)
@@ -40,6 +44,9 @@ export class ProductosService {
     return this.http.get(`${this.apiUrl}productos/export/excel`, {
       responseType: 'blob',
     });
+  }
+  getProductosCategoria(nombreCategoria: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}productos/categoria/${nombreCategoria}`);
   }
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error desconocido';

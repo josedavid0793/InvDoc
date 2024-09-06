@@ -1,6 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { ProductosService } from '../../servicios/productos.service';
 import Pusher from 'pusher-js';
+import { error } from 'console';
 
 @Component({
   selector: 'app-inventario',
@@ -8,14 +15,18 @@ import Pusher from 'pusher-js';
   styleUrl: './inventario.component.css',
 })
 export class InventarioComponent implements OnInit, OnDestroy {
+  @ViewChild('slider')
+  slider!: ElementRef;
   totalProductos: number = 0;
   costoTotal: number = 0;
   private pusher: Pusher;
   private channel: any;
+  categorias: any[] = [];
+  productos: any[] = [];
   isCrearCategoriaVisible: boolean = false;
   isCrearProductoVisible: boolean = false;
   isExpInventario: boolean = false;
-
+  isGetCategoria: boolean = false;
 
   constructor(private productoService: ProductosService) {
     this.pusher = new Pusher('1858994', {
@@ -23,6 +34,8 @@ export class InventarioComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
+    this.cargarCategorias();
+    this.cargarProductos();
     this.productoService.obtenerCostoTotal().subscribe((data) => {
       this.costoTotal = data.costo_total;
     });
@@ -56,9 +69,79 @@ export class InventarioComponent implements OnInit, OnDestroy {
       this.fetchTotalProductos();
     });
   }
- /* cerrarCrearProducto() {
-    this.mostrarCrearProducto = false;
-  }*/
+
+  ngAfterViewInit() {
+    this.addSwipeListener();
+  }
+
+  moveNext() {
+    this.slider.nativeElement.scrollBy({
+      left: 200, // Ajusta según el tamaño de los botones
+      behavior: 'smooth',
+    });
+  }
+
+  movePrev() {
+    this.slider.nativeElement.scrollBy({
+      left: -200, // Ajusta según el tamaño de los botones
+      behavior: 'smooth',
+    });
+  }
+
+  addSwipeListener() {
+    const slider = this.slider.nativeElement;
+    let startX = 0;
+
+    slider.addEventListener('touchstart', (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchmove', (e: TouchEvent) => {
+      const touch = e.touches[0];
+      const diffX = startX - touch.clientX;
+
+      slider.scrollBy({
+        left: diffX,
+        behavior: 'smooth',
+      });
+
+      startX = touch.clientX;
+    });
+  }
+
+  cargarCategorias() {
+    this.productoService.obtenerCategorias().subscribe(
+      (data: any[]) => {
+        this.categorias = data;
+      },
+      (error) => {
+        console.error('Error al obtener categorías', error);
+      }
+    );
+  }
+  cargarProductos(){
+    this.productoService.obtenerProductos().subscribe(
+      (data:any[]) =>{
+        this.productos = data
+      },
+      (error) => {
+        console.error('Error al obtener productos', error);
+
+      }
+  );
+  }
+  // Filtra los productos por nombre de la categoría
+  filtrarProductos(nombreCategoria: string): void {
+    this.productoService.getProductosCategoria(nombreCategoria).subscribe(
+      (data: any[]) => {
+        this.productos = data; // Actualiza la lista de productos con los filtrados
+      },
+      (error) => {
+        console.error('Error al filtrar productos', error);
+      }
+    );
+  }
+
   onCloseCrearProducto() {
     this.isCrearProductoVisible = false;
   }
@@ -80,5 +163,11 @@ export class InventarioComponent implements OnInit, OnDestroy {
   }
   onCloseExpInventario() {
     this.isExpInventario = false;
+  }
+  onOpenGetCategoria() {
+    this.isGetCategoria = true;
+  }
+  onCloseGetCategoria() {
+    this.isGetCategoria = false;
   }
 }

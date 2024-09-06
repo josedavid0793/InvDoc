@@ -18,6 +18,7 @@ import { InventarioComponent } from './paginas/inventario/inventario.component';
 import { CrearproductoComponent } from './componentes/crearproducto/crearproducto.component';
 import { CrearcategoriaComponent } from './componentes/crearcategoria/crearcategoria.component';
 import { ExpinventarioComponent } from './componentes/expinventario/expinventario.component';
+import { GetcategoriaComponent } from './componentes/getcategoria/getcategoria.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ExpinventarioComponent } from './componentes/expinventario/expinventari
     InventarioComponent,
     CrearproductoComponent,
     CrearcategoriaComponent,
-    ExpinventarioComponent
+    ExpinventarioComponent,
+    GetcategoriaComponent
   ],
   imports: [
     ReactiveFormsModule,

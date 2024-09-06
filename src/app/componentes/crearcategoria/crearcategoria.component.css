@@ -90,7 +90,7 @@ h2 {
   flex-wrap: wrap;
   align-content: space-around;
 }
-.input-form::placeholder {
+input::placeholder {
   color: #888; /* Color del texto del placeholder */
   font-style: italic; /* Estilo de fuente */
   opacity: 1; /* Asegura que el placeholder sea completamente visible */

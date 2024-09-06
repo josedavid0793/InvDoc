@@ -36,11 +36,12 @@ p {
 }
 
 .div-opcion {
-  background:#f2f3f4;
-  block-size: 50vh;
+  background: #f2f3f4;
+  block-size: 100%;
   border-start-start-radius: 48px;
   border-start-end-radius: 48px;
   display: flex;
+  gap: 10px;
   flex-direction: column;
   inline-size: 100%;
   justify-content: flex-start;
@@ -71,16 +72,11 @@ p {
   padding: 8px 8px;
   text-transform: uppercase;
 }
-.button1:hover{
+.button1:hover {
   cursor: pointer;
   background: #52be80;
 }
-/*.option-descarga{
-  align-items: center;
-  display: flex;
-  inline-size: 10%;
-  justify-content: center;
-}*/
+
 .button2 {
   background: #f4f6f7;
   block-size: 47px;
@@ -92,19 +88,20 @@ p {
   padding: 8px 8px;
   text-transform: uppercase;
 }
-.button2:hover{
+.button2:hover {
   cursor: pointer;
 }
-.option-buscar{
+.option-buscar {
   align-items: center;
   display: flex;
   inline-size: 50%;
   justify-content: center;
 }
-.div-option-2{
-  background: blueviolet;
+.div-option-2 {
+  align-items: center;
   block-size: 13vh;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 .input-button-search {
@@ -139,7 +136,184 @@ p {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+.option-1 {
+  align-items: center;
+  block-size: 100%;
+  display: flex;
+  justify-content: center;
+  inline-size: 17%;
+}
+.button3 {
+  background: #2c3e50;
+  block-size: 47px;
+  border: 1px solid gray;
+  border-radius: 40px;
+  color: #fff;
+  font-size: 11px;
+  inline-size: 95%;
+  padding: 8px 8px;
+  text-transform: uppercase;
+}
+.button3:hover {
+  cursor: pointer;
+  background: #566573;
+}
+.option-1 button i {
+  margin-inline-end: 5px;
+}
+.slider-container {
+  block-size: 100%;
+  position: relative;
+  display: flex;
+  inline-size: 80%;
+  align-items: center;
+}
+
+.option-2 {
+  display: flex;
+  gap: 5px;
+  overflow: hidden; /* Oculta los botones fuera del contenedor */
+  inline-size: 100%; /* Ajusta el ancho del slider */
+  scroll-behavior: smooth;
+}
+.button4 {
+  background: #fdfefe;
+  block-size: 44px;
+  border: 1px solid #d0d3d4;
+  border-radius: 10px;
+  color: #000;
+  font-size: 11px;
+  inline-size: 30%;
+  padding: 5px 5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.prev-btn,
+.next-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+
+.button4:hover {
+  cursor: pointer;
+  background: #f7f9f9;
+}
+.div-option-3 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.option3-1 {
+  background: #fbfcfc;
+  display: flex;
+  flex-direction: column;
+  inline-size: 23%; /* Asegura 4 tarjetas por fila */
+  margin-block-end: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.option3-1:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.div-img-slider {
+  position: relative;
+  inline-size: 100%;
+  block-size: 190px; /* Ajusta según el tamaño deseado */
+  overflow: hidden;
+}
+.div-img {
+  display: none;
+}
+
+.div-img:first-child {
+  display: block;
+}
+
+.img-data {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover; /* Mantiene la imagen sin deformarse */
+}
+
+.slider-prev, .slider-next {
+  position: absolute;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.slider-prev {
+  inset-inline-start: 10px;
+}
+
+.slider-next {
+  inset-inline-end: 10px;
+}
+
+
+.p-productos {
+  font-size: 14px;
+  color: #666;
+  margin: 4px 0;
+}
+.p-nombre {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-block-end: 8px;
+}
+
+.div-img {
+  block-size: 40%;
+  inline-size: 100%;
+  text-align: center;
+  align-content: center;
+}
+.div-data {
+  padding: 15px;
+  text-align: center;
+}
+.div-nombre{
+  block-size: 17%
+}
+.div-p{
+  block-size: 16%;
+  inline-size: 100%;
+}
+.img-data{
+  block-size: 100%;
+  inline-size: 100%;
+}
+strong{
+  color: #000;
+}
 @media (max-width: 600px) {
+  .option3-1 {
+    inline-size: 100%; /* 1 tarjeta por fila en pantallas pequeñas */
+  }
   .container-sup {
     margin-block-start: 30px;
     padding: 10px 10px;
@@ -158,15 +332,15 @@ p {
   p {
     font-size: 16px;
   }
-  .div-option-1{
+  .div-option-1 {
     block-size: 16vh;
     display: flex;
     flex-flow: column-reverse;
   }
-  .option-buscar{
+  .option-buscar {
     inline-size: 97%;
   }
-  .input-button-search{
+  .input-button-search {
     block-size: 37px;
     inline-size: 80%;
   }
@@ -181,16 +355,31 @@ p {
     inline-size: 100%;
     text-align: center;
   }
-  .option-button{
+  .option-button {
     gap: 25px;
     inline-size: 100%;
     margin-block-start: 5px;
     margin-block-end: 5px;
   }
-  .button1,.button2{
+  .button1,
+  .button2 {
     block-size: 45px;
     inline-size: 45px;
     border-radius: 65px;
     border: 1px solid #000;
+  }
+  .option-1 button .text {
+    display: none;
+  }
+  /* Centrar el ícono cuando el texto no está presente */
+  .option-1 button i {
+    margin-inline-end: 0;
+    display: block;
+    inline-size: 100%;
+    text-align: center;
+  }
+  .prev-btn,
+  .next-btn {
+    display: none;
   }
 }
