@@ -42,7 +42,8 @@ class ProductoController extends Controller
             'costo_unidad' => 'nullable|numeric|regex:/^\d+$/',
             'codigo' => 'nullable|string|max:50',
             'cantidad_disponible' => 'nullable|numeric|regex:/^\d+$/',
-            'imagen' => 'nullable|string|max:500',
+            'imagen' => 'nullable|array',
+            'imagen.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'categoria' => 'nullable|string|max:100',
         ];
 
@@ -63,12 +64,24 @@ class ProductoController extends Controller
             $producto->costo_unidad = $request->costo_unidad;
             $producto->codigo = $request->codigo;
             $producto->cantidad_disponible = $request->cantidad_disponible;
-            $producto->imagen = $request->imagen;
+            // Procesar y guardar las imágenes
+            $imagenRutas = [];
+            if ($request->hasFile('imagen')) {
+                foreach ($request->file('imagen') as $imagen) {
+                    $nombreArchivo = time() . '_' . $imagen->getClientOriginalName();
+                    $ruta = $imagen->storeAs('productos', $nombreArchivo, 'public');
+                    $imagenRutas[] = $ruta;
+                }
+            }else {
+                // Si no se enviaron imágenes, deja el campo vacío
+                $producto->imagen = json_encode([]); 
+            }
+            $producto->imagen = json_encode($imagenRutas); // Guardar las rutas como JSON            
             $producto->categoria = $request->categoria;
             $producto->save();
 
             // Emitir evento cuando se agrega un producto
-        event(new ProductoAgregado($producto));
+            event(new ProductoAgregado($producto));
 
             return response()->json([
                 'mensaje' => 'Se ha creado el producto ' . $producto->nombre,
@@ -208,7 +221,7 @@ class ProductoController extends Controller
         ]);
     }
 
-     /**
+    /**
      * Obtener el costo total de todos los productos.
      *
      * @return JsonResponse
@@ -219,16 +232,16 @@ class ProductoController extends Controller
         return response()->json(['costo_total' => $costoTotal]);
     }
 
-   /* public function exportExcel()
+    /* public function exportExcel()
     {
         return Excel::download(new ProductsExport, 'products.xlsx');
     }*/
 
     public function exportPdf()
     {
-       $productos = Producto::all();
+        $productos = Producto::all();
 
-        $pdf = PDF::loadView('productos.pdf',compact('productos'));
+        $pdf = PDF::loadView('productos.pdf', compact('productos'));
         return $pdf->download('productos.pdf');
     }
 
@@ -242,18 +255,17 @@ class ProductoController extends Controller
     }
 
     public function productoPorCategoria($nombreCategoria)
-{
- // Verifica si existe una categoría con ese nombre
- $categoria = Categoria::where('nombre', $nombreCategoria)->first();
+    {
+        // Verifica si existe una categoría con ese nombre
+        $categoria = Categoria::where('nombre', $nombreCategoria)->first();
 
- if (!$categoria) {
-     return response()->json(['mensaje' => 'Categoría no encontrada'], 404);
- }
+        if (!$categoria) {
+            return response()->json(['mensaje' => 'Categoría no encontrada'], 404);
+        }
 
- // Obtén los productos que pertenecen a esa categoría
- $productos = Producto::where('categoria', $categoria->nombre)->get();
+        // Obtén los productos que pertenecen a esa categoría
+        $productos = Producto::where('categoria', $categoria->nombre)->get();
 
- return response()->json($productos);
-}
-
+        return response()->json($productos);
+    }
 }

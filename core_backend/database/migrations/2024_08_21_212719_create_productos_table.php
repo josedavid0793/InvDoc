@@ -16,13 +16,14 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',200)->unique();
-            $table->string('descripcion',1000);
-            $table->integer('precio_unidad');
-            $table->integer('costo_unidad');
-            $table->string('codigo',50)->unique();
-            $table->integer('cantidad_disponible');
-            $table->string('imagen',500);
-            $table->string('categoria');
+            $table->string('descripcion',1000)->nullable();
+            $table->integer('precio_unidad')->nullable();
+            $table->integer('costo_unidad')->nullable();
+            $table->string('codigo',50)->unique()->nullable();
+            $table->integer('cantidad_disponible')->nullable();
+            $table->json('imagen')->nullable()->change();
+            //$table->string('imagen',500);
+            $table->string('categoria')->nullable();
 
            $table->foreign('categoria')->references('nombre')->on('categorias')->onDelete('cascade')->onUpdate('cascade');
             //$table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade')->onUpdate('cascade');
