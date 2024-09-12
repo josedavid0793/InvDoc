@@ -67,27 +67,66 @@
         <button class="next-btn" (click)="moveNext()">&#10095;</button>
       </div>
     </div>
-    <div class="div-option-3">
+    <div *ngIf="mensajeSinResultados" class="div-null">
+      <p>{{ mensajeSinResultados }}</p>
+    </div>
+    <div
+      *ngIf="!mensajeSinResultados && productos.length > 0"
+      class="div-option-3"
+    >
       <div *ngFor="let producto of productos" class="option3-1">
         <div class="div-img-slider">
-          <div *ngFor="let imagen of producto.imagenes" class="div-img">
-            <img class="img-data" [src]="imagen" alt="" />
+          <div
+            *ngFor="let imagen of producto.imagen; let i = index"
+            class="div-img"
+            [ngClass]="{ active: i === producto.activeImageIndex }"
+          >
+            <img class="img-data" [src]="'/storage/' + imagen" alt="" />
           </div>
-          <button class="slider-prev">‹</button>
-          <button class="slider-next">›</button>
+          <button class="slider-prev" (click)="prevImage(producto)">‹</button>
+          <button class="slider-next" (click)="nextImage(producto)">›</button>
+          <!--<button class="slider-prev">‹</button>
+          <button class="slider-next">›</button>-->
         </div>
         <div class="div-data">
           <div class="div-nombre">
             <p class="p-nombre">{{ producto.nombre }}</p>
           </div>
           <div class="div-p">
-            <p class="p-productos">{{ producto.cantidad_disponible }} Disponibles</p>
+            <p class="p-productos">
+              {{ producto.cantidad_disponible }} Disponibles
+            </p>
           </div>
           <div class="div-p">
-            <p class="p-productos">Costo unitario <strong>{{ producto.costo_unidad | currency }}</strong></p>
+            <p class="p-productos">
+              Costo unitario
+              <strong>{{ producto.costo_unidad | currency }}</strong>
+            </p>
           </div>
           <div class="div-p">
-            <p class="p-productos">Precio unitario <strong>{{ producto.precio_unidad | currency }}</strong></p>
+            <p class="p-productos">
+              Precio unitario
+              <strong>{{ producto.precio_unidad | currency }}</strong>
+            </p>
+          </div>
+          <div class="div-opcion-pro">
+            <button
+              class="button-option"
+              type="menu"
+              (click)="toggleOptionPro(producto)"
+            >
+              <img src="../../../assets/opcion.png" />
+            </button>
+            <div
+            *ngFor="let producto of productos"
+            [ngClass]="{
+                'div-opcion-pro2': true,
+                show: producto.isOptionPro
+              }"
+            >
+              <a class="a-option" (click)="onOpenEliminarProducto(producto)">Borrar</a>
+              <a class="a-option">Editar</a>
+            </div>
           </div>
         </div>
       </div>
@@ -113,5 +152,13 @@
     *ngIf="isGetCategoria"
     class="crear-producto-overlay"
   ></app-getcategoria>
+  <app-eliminarproducto
+    *ngIf="isEliminarProducto"
+    [idProducto]="productoAEliminar?.id"
+    [nombreProducto]="productoAEliminar?.nombre"
+    (close)="onCloseEliminarProducto()"
+    (eliminacionCompleta)="onProductoEliminado()"
+    class="crear-producto-overlay"
+  ></app-eliminarproducto>
 </div>
 <app-footer></app-footer>

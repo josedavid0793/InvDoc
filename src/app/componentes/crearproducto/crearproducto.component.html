@@ -6,16 +6,22 @@
       </div>
       <div class="div-form2">
         <div class="form2-image">
-          <label for="imagen" class="camera-label"></label>
+          <label for="imagen" class="camera-label" [style.backgroundImage]="previewUrl"></label>
           <input
             class="camera-input"
             type="file"
             accept="image/*"
             capture="camera"
-            (change)="onFileSelected($event)"
+            (change)="onFileChange($event)"
             id="imagen"
             formControlName="imagen"
+            multiple
+            #fileInput
           />
+          <div *ngIf="selectedFiles.length > 0" class="div-total-img">
+           {{ selectedFiles.length }}
+          </div>
+          <!--<div class="camera-label" [style.backgroundImage]="previewUrl"></div>-->
         </div>
         <div class="form2-input">
           <div class="div-wrap">

@@ -19,6 +19,8 @@ import { CrearproductoComponent } from './componentes/crearproducto/crearproduct
 import { CrearcategoriaComponent } from './componentes/crearcategoria/crearcategoria.component';
 import { ExpinventarioComponent } from './componentes/expinventario/expinventario.component';
 import { GetcategoriaComponent } from './componentes/getcategoria/getcategoria.component';
+import { EliminarcategoriaComponent } from './componentes/eliminarcategoria/eliminarcategoria.component';
+import { EliminarproductoComponent } from './componentes/eliminarproducto/eliminarproducto.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { GetcategoriaComponent } from './componentes/getcategoria/getcategoria.c
     CrearproductoComponent,
     CrearcategoriaComponent,
     ExpinventarioComponent,
-    GetcategoriaComponent
+    GetcategoriaComponent,
+    EliminarcategoriaComponent,
+    EliminarproductoComponent
   ],
   imports: [
     ReactiveFormsModule,

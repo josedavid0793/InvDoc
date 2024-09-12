@@ -25,8 +25,8 @@ export class ProductosService {
     return this.http.get<any[]>(`${this.apiUrl}productos`).pipe(
       map(response => response[0]));
   }
-  crearProducto(producto:any):Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}productos/crear`,producto).pipe(
+  crearProducto(formData: FormData):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}productos/crear`,formData).pipe(
       catchError(this.handleError)
     );
   }
@@ -59,5 +59,8 @@ export class ProductosService {
     }
     console.error(errorMessage);
     return throwError(errorMessage);
+  }
+  deleteProducto(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}productos/${id}`);
   }
 }

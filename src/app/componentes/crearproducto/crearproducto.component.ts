@@ -19,6 +19,8 @@ export class CrearproductoComponent implements OnInit {
   errorMessage: string = '';
   cantidad: number = 0;
   categorias: any[] = [];
+  selectedFiles: File[] = [];
+  previewUrl: string | null = null;
   constructor(private productoService: ProductosService) {}
 
   ngOnInit(): void {
@@ -41,24 +43,37 @@ export class CrearproductoComponent implements OnInit {
       costo_unidad: new FormControl(''),
       codigo: new FormControl(''),
       cantidad_disponible: new FormControl(''),
-      imagen: new FormControl(''),
+      //imagen: new FormControl(''),
+      imagen: new FormControl(null),
       categoria: new FormControl(''),
     });
   }
 
   onSubmit() {
     if (this.productoForm.valid) {
-      this.productoService.crearProducto(this.productoForm.value).subscribe(
+      const formData = new FormData();
+      
+      // Agregar los campos del formulario al FormData
+      Object.keys(this.productoForm.value).forEach(key => {
+        formData.append(key, this.productoForm.get(key).value);
+      });
+
+      // Agregar los archivos seleccionados al FormData
+      this.selectedFiles.forEach((file, index) => {
+        formData.append(`imagen[]`, file, file.name);
+        console.log('no se cargo la imagen')
+      });
+
+      this.productoService.crearProducto(formData).subscribe(
         response => {
           this.successMessage = response.mensaje;
-            this.errorMessage = '';
+          this.errorMessage = '';
           console.log('Producto creado:', response);
-          // Emitir el evento cuando el formulario se envíe correctamente
-    this.close.emit();
+          this.close.emit();
         },
         error => {
           this.errorMessage = error;
-            this.successMessage = '';
+          this.successMessage = '';
           console.error('Error al crear Producto:', error);
         }
       );
@@ -68,23 +83,24 @@ export class CrearproductoComponent implements OnInit {
       console.log('Formulario inválido');
     }
   }
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      const reader = new FileReader();
+ 
 
-      reader.onload = (e: any) => {
-        const label = document.querySelector(
-          '.camera-label'
-        ) as HTMLLabelElement;
-        label.style.backgroundImage = `url('${e.target.result}')`;
-        label.style.backgroundSize = 'cover'; // Ajusta el tamaño de la imagen para cubrir el área del botón
-      };
-
-      reader.readAsDataURL(file);
+    onFileChange(event: Event): void {
+      const input = event.target as HTMLInputElement;
+      if (input.files && input.files.length > 0) {
+        this.selectedFiles = Array.from(input.files);
+        
+        // Mostrar vista previa de la primera imagen
+        const firstFile = this.selectedFiles[0];
+        const reader = new FileReader();
+  
+        reader.onload = (e: any) => {
+          this.previewUrl = `url('${e.target.result}')`;
+        };
+  
+        reader.readAsDataURL(firstFile);
+      }
     }
-  }
 
   increment(): void {
     this.cantidad++;

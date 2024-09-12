@@ -1,0 +1,15 @@
+.button-2 {
+    background-color: #95a5a6;
+    block-size: 50px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    inline-size: 220px;
+    font-size: larger;
+    padding: 10px 15px;
+  }
+  .button2:hover {
+    background-color: #bfc9ca;
+    cursor: pointer;
+  }

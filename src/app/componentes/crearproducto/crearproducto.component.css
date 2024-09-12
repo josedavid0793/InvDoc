@@ -34,6 +34,14 @@ select {
   inline-size: 95%;
   padding: 8px;
 }
+.input-form:focus {
+  border: 1px solid #ccc;
+  outline: none;
+}
+select:focus {
+  border: 1px solid #ccc;
+  outline: none;
+}
 .button-1 {
   background-color: #007bff;
   block-size: 50px;
@@ -101,7 +109,7 @@ h2 {
   block-size: 150px;
   background-color: #f0f0f0; /* Fondo del botón */
   background-image: url("http://localhost:4200/assets/camara.png"); /* Icono de cámara */
-  background-size: 60%; /* Ajusta el tamaño del ícono */
+  background-size: 100%; /* Ajusta el tamaño del ícono */
   background-repeat: no-repeat;
   background-position: center;
   border: none; /* Quitar bordes */
@@ -222,6 +230,10 @@ h2 {
   opacity: 1; /* Asegura que el placeholder sea completamente visible */
   font-size: 14px; /* Tamaño de fuente */
 }
+.text-form:focus {
+  border: 1px solid #ccc;
+  outline: none;
+}
 .div-button {
   display: flex;
   justify-content: space-between;
@@ -250,7 +262,7 @@ h2 {
 /* Estilos para las opciones */
 .custom-select option {
   padding: 10px; /* Espaciado interno de las opciones */
-  background-color: #ffffff;/* Color de fondo de las opciones */
+  background-color: #ffffff; /* Color de fondo de las opciones */
   color: #333; /* Color del texto de las opciones */
 }
 
@@ -286,35 +298,36 @@ h2 {
   .div-contenedor {
     justify-content: center;
   }
-  form{
+  form {
     block-size: 82vh;
     max-inline-size: 96%;
     padding: 10px;
   }
-  .div-form1{
+  .div-form1 {
     justify-content: center;
     block-size: 6%;
   }
-  .div-form2{
+  .div-form2 {
     block-size: 17%;
   }
-  .div-form3{
+  .div-form3 {
     flex-direction: column;
     block-size: 25%;
   }
-  .div-form4{
+  .div-form4 {
     flex-direction: column;
     block-size: 30%;
   }
-  .div-button{
+  .div-button {
     block-size: 20%;
     inline-size: 100%;
   }
-  .camera-label{
+  .camera-label {
     inline-size: 115px;
     block-size: 115px;
   }
-  .button-1,.button-2{
+  .button-1,
+  .button-2 {
     block-size: 46px;
     inline-size: 184px;
   }

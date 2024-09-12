@@ -239,12 +239,23 @@ p {
   block-size: 190px; /* Ajusta según el tamaño deseado */
   overflow: hidden;
 }
-.div-img {
+/*.div-img {
   display: none;
 }
 
 .div-img:first-child {
   display: block;
+}*/
+.div-img {
+  display: none;
+}
+
+.div-img.active {
+  display: block;
+}
+
+.div-img-slider {
+  position: relative;
 }
 
 .img-data {
@@ -253,16 +264,15 @@ p {
   object-fit: cover; /* Mantiene la imagen sin deformarse */
 }
 
-.slider-prev, .slider-next {
+.slider-prev,
+.slider-next {
   position: absolute;
   inset-block-start: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
+  background: none;
   border: none;
-  padding: 10px;
+  font-size: 2rem;
   cursor: pointer;
-  z-index: 1;
 }
 
 .slider-prev {
@@ -272,7 +282,6 @@ p {
 .slider-next {
   inset-inline-end: 10px;
 }
-
 
 .p-productos {
   font-size: 14px;
@@ -287,7 +296,7 @@ p {
 }
 
 .div-img {
-  block-size: 40%;
+  block-size: 100%;
   inline-size: 100%;
   text-align: center;
   align-content: center;
@@ -296,23 +305,71 @@ p {
   padding: 15px;
   text-align: center;
 }
-.div-nombre{
-  block-size: 17%
+.div-nombre {
+  block-size: 17%;
 }
-.div-p{
+.div-p {
   block-size: 16%;
   inline-size: 100%;
 }
-.img-data{
+.img-data {
   block-size: 100%;
   inline-size: 100%;
 }
-strong{
+strong {
   color: #000;
 }
+.div-null {
+  text-align: center;
+}
+.div-total-img {
+  margin-inline-start: 10px;
+}
+.div-opcion-pro {
+  position: relative;
+}
+
+.div-opcion-pro2 {
+  position: absolute;
+  inset-block-end: 100%;
+  inset-inline-end: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: none;
+}
+
+.div-opcion-pro2.show {
+  display: flex;
+  inline-size: 94px;
+  flex-direction: column;}
+
+.button-option {
+  border-radius: 50%;
+  background: white;
+  border: 1px gray solid;
+}
+.button-option:hover{
+  cursor: pointer;
+}
+.a-option{
+  border: 1px #fff solid;
+    inline-size: 100%;
+}
+.a-option:hover{
+  border: 1px #666 solid;
+  cursor: pointer;
+  background: #f2f3f4;
+}
+
 @media (max-width: 600px) {
   .option3-1 {
-    inline-size: 100%; /* 1 tarjeta por fila en pantallas pequeñas */
+    inline-size: 80%; /* 1 tarjeta por fila en pantallas pequeñas */
+  }
+  .div-option-3 {
+    justify-content: center;
   }
   .container-sup {
     margin-block-start: 30px;
@@ -381,5 +438,9 @@ strong{
   .prev-btn,
   .next-btn {
     display: none;
+  }
+  .div-opcion-pro2 {
+    inset-block-end: 0%;
+    inset-inline-end: 8%;
   }
 }
