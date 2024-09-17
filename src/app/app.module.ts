@@ -21,6 +21,7 @@ import { ExpinventarioComponent } from './componentes/expinventario/expinventari
 import { GetcategoriaComponent } from './componentes/getcategoria/getcategoria.component';
 import { EliminarcategoriaComponent } from './componentes/eliminarcategoria/eliminarcategoria.component';
 import { EliminarproductoComponent } from './componentes/eliminarproducto/eliminarproducto.component';
+import { EditarproductoComponent } from './componentes/editarproducto/editarproducto.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EliminarproductoComponent } from './componentes/eliminarproducto/elimin
     ExpinventarioComponent,
     GetcategoriaComponent,
     EliminarcategoriaComponent,
-    EliminarproductoComponent
+    EliminarproductoComponent,
+    EditarproductoComponent
   ],
   imports: [
     ReactiveFormsModule,

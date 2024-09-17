@@ -63,4 +63,10 @@ export class ProductosService {
   deleteProducto(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}productos/${id}`);
   }
+  updateProducto(formData: FormData,id: number):Observable<any>{
+    formData.append('_method', 'PUT'); // Esto emula una solicitud PUT
+    return this.http.post<any>(`${this.apiUrl}productos/${id}`,formData).pipe(
+      catchError(this.handleError)
+    );
+  }
 }

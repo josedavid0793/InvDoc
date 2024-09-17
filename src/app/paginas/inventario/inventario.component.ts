@@ -29,8 +29,13 @@ export class InventarioComponent implements OnInit, OnDestroy {
   isGetCategoria: boolean = false;
   isEliminarProducto: boolean = false;
   productoAEliminar: any = null;
+  isEditarProducto: boolean = false;
+  productoAEditar: any = null;
   isOptionPro: boolean = false;
   mensajeSinResultados: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
+  paginatedProductos: any[] = [];
 
   constructor(private productoService: ProductosService) {
     this.pusher = new Pusher('1858994', {
@@ -128,7 +133,7 @@ export class InventarioComponent implements OnInit, OnDestroy {
     this.productoService.obtenerProductos().subscribe(
       (data: any[]) => {
         this.productos = data.map((producto) => {
-          // Si 'imagenes' es una cadena, la convertimos en un array
+          // Si 'imagen' es una cadena, la convertimos en un array
           if (typeof producto.imagen === 'string') {
             producto.imagen = JSON.parse(producto.imagen);
           }
@@ -137,13 +142,16 @@ export class InventarioComponent implements OnInit, OnDestroy {
             activeImageIndex: 0, // Inicializamos el índice de imagen activa
           };
         });
-        this.mensajeSinResultados = ''; // Limpiamos el mensaje de sin resultados
+        this.mensajeSinResultados =
+          this.productos.length === 0 ? 'No se encontraron productos' : '';
+        this.setPaginatedProductos(); // Llamamos a la función para establecer los productos paginados
       },
       (error) => {
         console.error('Error al obtener productos', error);
       }
     );
   }
+
   filtrarProductos(nombreCategoria: string): void {
     this.productoService.getProductosCategoria(nombreCategoria).subscribe(
       (data: any[]) => {
@@ -239,5 +247,33 @@ export class InventarioComponent implements OnInit, OnDestroy {
   onProductoEliminado() {
     this.cargarProductos(); // Recargar la lista de productos
     this.onCloseEliminarProducto();
+  }
+
+  // Función para actualizar los productos según la página actual
+  setPaginatedProductos() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedProductos = this.productos.slice(startIndex, endIndex);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.productos.length / this.itemsPerPage);
+  }
+
+  // Cambiar página y actualizar los productos paginados
+  changePage(page: number) {
+    if (page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.setPaginatedProductos();
+    }
+  }
+
+  onOpenEditarProducto(producto: any) {
+    this.productoAEditar = producto;
+    this.isEditarProducto = true;
+  }
+  onCloseEditarProducto() {
+    this.isEditarProducto = false;
+    this.productoAEditar = null;
   }
 }

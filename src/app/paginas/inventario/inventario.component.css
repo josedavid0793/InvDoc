@@ -199,11 +199,11 @@ p {
 }
 
 .prev-btn {
-  left: 0;
+  right: 99%;
 }
 
 .next-btn {
-  right: 0;
+  left: 99%;
 }
 
 .button4:hover {
@@ -261,7 +261,7 @@ p {
 .img-data {
   inline-size: 100%;
   block-size: 100%;
-  object-fit: cover; /* Mantiene la imagen sin deformarse */
+  object-fit: contain; /* Mantiene la imagen sin deformarse */
 }
 
 .slider-prev,
@@ -364,6 +364,32 @@ strong {
   background: #f2f3f4;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  background-color: #aed6f1;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  margin: 0 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button.active {
+  background-color: #659279;
+}
+
 @media (max-width: 600px) {
   .option3-1 {
     inline-size: 80%; /* 1 tarjeta por fila en pantallas pequeñas */
@@ -442,5 +468,9 @@ strong {
   .div-opcion-pro2 {
     inset-block-end: 0%;
     inset-inline-end: 8%;
+  }
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }

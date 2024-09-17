@@ -74,7 +74,7 @@
       *ngIf="!mensajeSinResultados && productos.length > 0"
       class="div-option-3"
     >
-      <div *ngFor="let producto of productos" class="option3-1">
+      <div *ngFor="let producto of paginatedProductos" class="option3-1">
         <div class="div-img-slider">
           <div
             *ngFor="let imagen of producto.imagen; let i = index"
@@ -118,19 +118,26 @@
               <img src="../../../assets/opcion.png" />
             </button>
             <div
-            *ngFor="let producto of productos"
+
             [ngClass]="{
                 'div-opcion-pro2': true,
                 show: producto.isOptionPro
               }"
             >
               <a class="a-option" (click)="onOpenEliminarProducto(producto)">Borrar</a>
-              <a class="a-option">Editar</a>
+              <a class="a-option" (click)="onOpenEditarProducto(producto)">Editar</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+    <button *ngFor="let page of [].constructor(totalPages); let i = index" 
+            (click)="changePage(i + 1)" 
+            [class.active]="i + 1 === currentPage">{{ i + 1 }}</button>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
   </div>
   <!-- Mostrar app-crearproducto cuando mostrarCrearProducto sea true -->
   <app-crearproducto
@@ -160,5 +167,20 @@
     (eliminacionCompleta)="onProductoEliminado()"
     class="crear-producto-overlay"
   ></app-eliminarproducto>
+  <app-editarproducto
+    *ngIf="isEditarProducto"
+    [idProducto]="productoAEditar?.id"
+    [nombreProducto]="productoAEditar?.nombre"
+    [descripcionProducto]="productoAEditar?.descripcion"
+    [precioUnidadProducto]="productoAEditar?.precio_unidad"
+    [costoUnidadProducto]="productoAEditar?.costo_unidad"
+    [codigoProducto]="productoAEditar?.codigo"
+    [cantidadProducto]="productoAEditar?.cantidad_disponible"
+    [imagenProducto]="productoAEditar?.imagen"
+    [categoriaProducto]="productoAEditar?.categoria"
+    [nombreProducto]="productoAEditar?.nombre"
+    (close)="onCloseEditarProducto()"
+    class="crear-producto-overlay"
+  ></app-editarproducto>
 </div>
 <app-footer></app-footer>
