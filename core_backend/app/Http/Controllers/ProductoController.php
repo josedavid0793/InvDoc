@@ -72,9 +72,9 @@ class ProductoController extends Controller
                     $ruta = $imagen->storeAs('productos', $nombreArchivo, 'public');
                     $imagenRutas[] = $ruta;
                 }
-            }else {
+            } else {
                 // Si no se enviaron imágenes, deja el campo vacío
-                $producto->imagen = json_encode([]); 
+                $producto->imagen = json_encode([]);
             }
             $producto->imagen = json_encode($imagenRutas); // Guardar las rutas como JSON            
             $producto->categoria = $request->categoria;
@@ -144,48 +144,65 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $reglas = [
-            'nombre' => 'required|string|max:200',
-            'descripcion' => 'nullable|string|max:1000',
-            'precio_unidad' => 'nullable|numeric|regex:/^\d+$/',
-            'costo_unidad' => 'nullable|numeric|regex:/^\d+$/',
-            'codigo' => 'nullable|string|max:50',
-            'cantidad_disponible' => 'nullable|numeric|regex:/^\d+$/',
-            'imagen' => 'nullable|string|max:500',
-            'categoria' => 'nullable|string|max:100',
-        ];
+{
+    $reglas = [
+        'nombre' => 'required|string|max:200',
+        'descripcion' => 'nullable|string|max:1000',
+        'precio_unidad' => 'nullable|numeric|regex:/^\d+$/',
+        'costo_unidad' => 'nullable|numeric|regex:/^\d+$/',
+        'codigo' => 'nullable|string|max:50',
+        'cantidad_disponible' => 'nullable|numeric|regex:/^\d+$/',
+        'imagen' => 'nullable|array',
+        'imagen.*' => 'nullable|array|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'categoria' => 'nullable|string|max:100',
+    ];
 
-        $validador = Validator::make($request->all(), $reglas);
+    $validador = Validator::make($request->all(), $reglas);
 
-        if ($validador->fails()) {
-            return response()->json([
-                'error' => 'Ha ocurrido un error al validar los datos enviados',
-                'mensaje' => $validador->errors()
-            ], 422);
-        }
-        try {
-            $producto = Producto::findOrFail($id);
-            $producto->nombre = $request->nombre;
-            $producto->descripcion = $request->descripcion;
-            $producto->precio_unidad = $request->precio_unidad;
-            $producto->costo_unidad = $request->costo_unidad;
-            $producto->codigo = $request->codigo;
-            $producto->cantidad_disponible = $request->cantidad_disponible;
-            $producto->imagen = $request->imagen;
-            $producto->categoria = $request->categoria;
-            $producto->save();
-            return response()->json([
-                'mensaje' => 'Se ha actualizado el producto ' . $producto->nombre,
-                'data' => $producto
-            ], 200, [], JSON_UNESCAPED_UNICODE);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Ha ocurrido un error al actualizar el producto en la base de datos',
-                'mensaje' => $e->getMessage()
-            ], 404);
-        }
+    if ($validador->fails()) {
+        return response()->json([
+            'error' => 'Ha ocurrido un error al validar los datos enviados',
+            'mensaje' => $validador->errors()
+        ], 422);
     }
+
+    try {
+        $producto = Producto::findOrFail($id);
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio_unidad = $request->precio_unidad;
+        $producto->costo_unidad = $request->costo_unidad;
+        $producto->codigo = $request->codigo;
+        $producto->cantidad_disponible = $request->cantidad_disponible;
+
+        // Procesar y guardar las imágenes
+        $imagenRutas = [];
+        if ($request->hasFile('imagen')) {
+            foreach ($request->file('imagen') as $imagen) {
+                $nombreArchivo = time() . '_' . $imagen->getClientOriginalName();
+                $ruta = $imagen->storeAs('productos', $nombreArchivo, 'public');
+                $imagenRutas[] = $ruta;
+            }
+            $producto->imagen = json_encode($imagenRutas);
+        } else {
+            // Si no se enviaron imágenes, deja el campo vacío
+            $producto->imagen = json_encode([]);
+        }
+
+        $producto->categoria = $request->categoria;
+        $producto->save();
+
+        return response()->json([
+            'mensaje' => 'Se ha actualizado el producto ' . $producto->nombre,
+            'data' => $producto
+        ], 200, [], JSON_UNESCAPED_UNICODE);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Ha ocurrido un error al actualizar el producto en la base de datos',
+            'mensaje' => $e->getMessage()
+        ], 404);
+    }
+}
 
     /**
      * Remove the specified resource from storage.

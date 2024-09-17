@@ -19,6 +19,8 @@ Route::get('me', [AuthController::class, 'me']);
 Route::get('/productos', [ProductoController::class, 'index']);
 Route::post('/productos/crear', [ProductoController::class, 'create']);
 Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
+Route::put('/productos/{id}', [ProductoController::class, 'update']);
+
 
 Route::get('/productos/contar', [ProductoController::class, 'contarProductos']);
 Route::get('/productos/costo-total', [ProductoController::class, 'obtenerCostoTotal']);
