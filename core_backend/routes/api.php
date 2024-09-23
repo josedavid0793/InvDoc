@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\VentasController;
+use App\Http\Controllers\GastosController;
 
 
 // Rutas públicas
@@ -29,14 +32,29 @@ Route::get('/productos/export/excel', [ProductoController::class, 'exportExcel']
 Route::get('/productos/categoria/{nombreCategoria}', [ProductoController::class, 'productoPorCategoria']);
 
 
-
-
 // Rutas de Categorías
 Route::get('/categorias', [CategoriaController::class,'index']);
 Route::post('/categorias/crear', [CategoriaController::class, 'store']);
-Route::get('/categorias/{{id}}', [CategoriaController::class, 'show']);
-Route::put('/categorias/{{id}}', [CategoriaController::class, 'update']);
-Route::delete('/categorias/{{id}}', [CategoriaController::class, 'delete']);
+Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
+Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
+Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
+
+// Rutas de ventas
+Route::get('/ventas/suma-total', [VentasController::class, 'sumarVentasTotales']);
+Route::get('/ventas', [VentasController::class,'index']);
+Route::post('/ventas', [VentasController::class,'store']);
+Route::get('/ventas/{id}', [VentasController::class,'show']);
+Route::put('/ventas/{id}', [VentasController::class,'update']);
+Route::delete('/ventas/{id}', [VentasController::class,'destroy']);
+
+//Rutas de gastos
+Route::get('/gastos/suma-total', [GastosController::class, 'sumarGastosTotales']);
+Route::get('/gastos', [GastosController::class,'index']);
+Route::post('/gastos', [GastosController::class,'store']);
+
+
+// Rutas de clientes
+Route::get('/clientes', [ClientesController::class,'index']);
 
 
 
