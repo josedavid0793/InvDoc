@@ -1,9 +1,18 @@
-<div>
+<div class="div-superior">
     <div>
-        <h2>¿Esta seguro de eliminar el producto ?</h2>
+      <h2>¿Esta seguro de eliminar la categoría <strong>{{ nombreCategoria }}</strong>?</h2>
     </div>
-    <div>
-        <button type="button">Aceptar</button>
-        <button class="button-2" type="button" (click)="onCancel()">Cancelar</button>
+    <div class="div-button">
+      <button
+        class="button-1"
+        type="submit"
+        (click)="eliminarCategoria()"
+      >
+        Aceptar
+      </button>
+      <button class="button-2" type="button" (click)="onCancel()">
+        Cancelar
+      </button>
     </div>
-</div>
+  </div>
+  

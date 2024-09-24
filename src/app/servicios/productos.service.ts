@@ -69,4 +69,7 @@ export class ProductosService {
       catchError(this.handleError)
     );
   }
+  deleteCategoria(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}categorias/${id}`);
+  }
 }

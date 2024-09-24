@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container-sup">
+  <div class="table-balance">
+    <div class="div-titulo">
+      <div class="div-h2">
+        <h2>Balance</h2>
+      </div>
+      <div class="div-p">
+        <p [ngClass]="{'positivo': totalBalance >= 0, 'negativo': totalBalance < 0}">
+            <strong>$ {{ totalBalance | number:'1.0-0'}}</strong>
+        </p>
+      </div>
+    </div>
+    <div class="div-cuerpo">
+      <div class="div-ingresos">
+        <div class="div-1-ing">
+          <img src="../../../assets/incrementar.png" />
+          <h3>Ingresos</h3>
+        </div>
+        <p>$ {{ totalVentas | number:'1.0-0'}}</p>
+      </div>
+      <div class="div-egresos">
+        <div class="div-1-eg">
+          <img src="../../../assets/disminucion.png" />
+          <h3>Egresos</h3>
+        </div>
+        <p>$ {{ totalGastos | number:'1.0-0'}}</p>
+      </div>
+    </div>
+    <div class="div-descargas">
+      <div class="div-des-rep">
+        <a (click)="onOpenExpBalance()">Descargar Reportes</a>
+      </div>
+      <div class="div-ver-bal">
+        <a>Ver Balance ></a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-balancereporte
+*ngIf="isExpBalance"
+(close)="onCloseExpBalance()"
+class="crear-producto-overlay"
+></app-balancereporte>
+<app-footer></app-footer>

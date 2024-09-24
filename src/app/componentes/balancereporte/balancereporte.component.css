@@ -1,22 +1,37 @@
 .div-principal {
   display: flex;
-  inline-size: 30%;
-  block-size: 35%;
-  background: #fff;
+  inline-size: 60%;
+  block-size: 40%;
+  background: #f9f9f9;
   align-content: center;
   align-items: end;
   flex-direction: column;
   position: relative;
 }
-
+.div-1 {
+  block-size: 20%;
+  display: flex;
+  flex-direction: row;
+  inline-size: 100%;
+}
+.div-h2 {
+  inline-size: 90%;
+  background: #fff;
+}
+h2 {
+  color: #000;
+  font: caption;
+  font-size: 22px;
+  margin-inline-start: 11px;
+}
 .div-cancel {
   align-items: center;
-  block-size: 24%;
+  block-size: 100%;
   background: #fff;
   border-radius: 0px;
   display: flex;
   justify-content: center;
-  inline-size: 16%;
+  inline-size: 10%;
 }
 .div-cancel button {
   position: static;
@@ -28,21 +43,21 @@
 .button-exp {
   align-items: center;
   background: #fff;
-  block-size: 100%;
   border: 1px #f0f0f0 solid;
+  block-size: 100%;
   display: flex;
-  font-size: 24px;
   inline-size: 100%;
   justify-content: center;
+  font-size: 24px;
 }
 .button-exp2 {
   align-items: center;
   background: #fff;
-  block-size: 100%;
   border: 1px #f0f0f0 solid;
+  block-size: 100%;
   display: flex;
-  font-size: 24px;
   inline-size: 100%;
+  font-size: 24px;
   justify-content: center;
 }
 
@@ -73,13 +88,45 @@
 .button-exp3:focus {
   outline: none; /* Quita el contorno al hacer foco */
 }
-.div-exp button img {
+.div-2 {
+  align-items: center;
+  background: #e0ecfa;
+  block-size: 20%;
+  display: flex;
+  flex-direction: row;
+  inline-size: 100%;
+  justify-content: flex-start;
+}
+.div-2 p {
+  color: #69abf4;
+  font-size: 17px;
+  font-weight: bolder;
+}
+.div-2 img {
+  margin-inline-end: 7px;
+  margin-inline-start: 7px;
+}
+.div-3{
+  block-size: 60%;
+  inline-size: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.div-exp button img{
   margin-inline-end: 10px;
 }
-
 @media (max-width: 600px) {
   .div-principal {
     inline-size: 70%;
-    block-size: 20%;
+    block-size: 35%;
+  }
+  .button-exp3{
+    block-size: 53%;
+    inline-size: 90%;
+  }
+  .div-3{
+    flex-direction: column;
   }
 }

@@ -1,11 +1,55 @@
-<div>
+<div class="div-principal">
   <div class="option-buscar">
     <input class="input-button-search" type="search" placeholder="Buscar..." />
   </div>
-  <div>
-    <button type="button"></button>
+  <div *ngFor="let categoria of paginatedCategorias" class="div-modal">
+    <p>{{ categoria.nombre }}</p>
+    <button class="button-1" type="button">
+      <i class="fas fa-pen"></i><span class="text">Editar</span>
+    </button>
+    <button
+      class="button-3"
+      type="button"
+      (click)="onOpenEliminarCategoria(categoria)"
+    >
+      <i class="fas fa-trash"></i><span class="text">Eliminar</span>
+    </button>
   </div>
-  <div>
-    <button type="button"></button>
+  <!-- Controles de paginación -->
+  <div class="pagination">
+    <button
+      (click)="changePage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+    >
+      Anterior
+    </button>
+
+    <!-- Botones de paginación dinámica según el número de páginas -->
+    <button
+      *ngFor="let page of [].constructor(totalPages); let i = index"
+      (click)="changePage(i + 1)"
+      [class.active]="i + 1 === currentPage"
+    >
+      {{ i + 1 }}
+    </button>
+
+    <button
+      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+    >
+      Siguiente
+    </button>
+  </div>
+  <div class="div-button">
+    <button class="button-2" type="button" (click)="onClose()">Cerrar</button>
   </div>
 </div>
+<app-eliminarcategoria
+  *ngIf="isEliminarCategoria"
+  [idCategoria]="categoriaAEliminar?.id"
+  [nombreCategoria]="categoriaAEliminar?.nombre"
+  (close)="onCloseEliminarCategoria()"
+  (eliminacionCompleta)="onCategoriaEliminado()"
+  class="crear-producto-overlay"
+>
+</app-eliminarcategoria>

@@ -1,9 +1,36 @@
-.option-buscar{
-    align-items: center;
-    display: flex;
-    inline-size: 100%;
-    justify-content: center;
-  }
+.div-principal {
+  align-items: center;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  block-size: 89%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  inline-size: 60%;
+  justify-content: center;
+  padding: 24px 10px;
+}
+.option-buscar {
+  align-items: center;
+  block-size: 20%;
+  display: flex;
+  inline-size: 100%;
+  justify-content: center;
+}
+.div-modal {
+  align-items: center;
+  block-size: 60%;
+  inline-size: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.div-button {
+  block-size: 10%;
+  inline-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .input-button-search {
   block-size: 42px;
   border: 1px solid #fff; /*borrar borde del boton*/
@@ -24,13 +51,130 @@
   opacity: 1; /* Asegura que el placeholder sea completamente visible */
   font: caption;
 }
+.button-1 {
+  background-color: #007bff;
+  block-size: 35px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  inline-size: 105px;
+  font-size: medium;
+  padding: 10px 15px;
+}
+.button-1:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+.button-3 {
+  background-color: #e74c3c;
+  block-size: 35px;
+  border: none;
+  border-radius: 4px;
+  color: #000;
+  cursor: pointer;
+  inline-size: 105px;
+  font-size: medium;
+  padding: 10px 15px;
+}
+.button-3:hover {
+  background-color: #ec7063;
+  cursor: pointer;
+}
+.button-2 {
+  background-color: #95a5a6;
+  block-size: 50px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  inline-size: 220px;
+  font-size: larger;
+  padding: 10px 15px;
+}
+.button2:hover {
+  background-color: #bfc9ca;
+  cursor: pointer;
+}
+p {
+  color: #000;
+  font-weight: 600;
+  inline-size: 60%;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 20px;
+  flex-wrap: wrap;
+}
 
+.pagination button {
+  background-color: #aed6f1;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  margin: 0 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button.active {
+  background-color: #659279;
+}
+.crear-producto-overlay {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.crear-producto-overlay app-eliminarcategoria {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+button i {
+  display: none;
+}
 @media (max-width: 600px) {
+  .div-principal {
+    block-size: 60%;
+    gap: 5px;
+    inline-size: 68%;
+  }
   .input-button-search {
     block-size: 37px;
     inline-size: 80%;
   }
-  .option-buscar{
+  .option-buscar {
     inline-size: 97%;
+  }
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .button-1 {
+    inline-size: 45px;
+  }
+  .button-3 {
+    inline-size: 45px;
+  }
+  button .text {
+    display: none;
+  }
+  button i {
+    display: block;
   }
 }

@@ -1,5 +1,8 @@
 .container-sup {
   block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   margin-block-start: 126px;
   padding: 20px 20px;
 }
@@ -344,21 +347,23 @@ strong {
 .div-opcion-pro2.show {
   display: flex;
   inline-size: 94px;
-  flex-direction: column;}
+  flex-direction: column;
+}
 
 .button-option {
   border-radius: 50%;
   background: white;
   border: 1px gray solid;
 }
-.button-option:hover{
+.button-option:hover {
   cursor: pointer;
 }
-.a-option{
+.a-option {
   border: 1px #fff solid;
-    inline-size: 100%;
+  color: #000;
+  inline-size: 100%;
 }
-.a-option:hover{
+.a-option:hover {
   border: 1px #666 solid;
   cursor: pointer;
   background: #f2f3f4;
@@ -390,6 +395,9 @@ strong {
   background-color: #659279;
 }
 
+button i {
+  display: none;
+}
 @media (max-width: 600px) {
   .option3-1 {
     inline-size: 80%; /* 1 tarjeta por fila en pantallas pequeñas */
@@ -472,5 +480,8 @@ strong {
   .pagination button {
     padding: 6px 12px;
     font-size: 12px;
+  }
+  button i {
+    display: block;
   }
 }
