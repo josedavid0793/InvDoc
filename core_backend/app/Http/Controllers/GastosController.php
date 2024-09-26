@@ -116,4 +116,49 @@ class GastosController extends Controller
             'total' => $totalGastos
         ], 200);
     }
+    public function contarGastos()
+    {
+        // Contar el total de productos
+        $totalGastos = Gastos::count();
+
+        // Devolver el resultado como respuesta JSON
+        return response()->json([
+            'total' => $totalGastos
+        ]);
+    }
+    public function obtenerTotalGastosPorEfectivo()
+    {
+        $totalGastosEfectivo = Gastos::where('metodo_pago', 'Efectivo')
+        ->where('modalidad_pago', 'Pagada')
+        ->sum('valor');
+
+        return response()->json(['total' => $totalGastosEfectivo]);
+    }
+
+    public function obtenerTotalGastosNoEfectivo()
+    {
+        // Filtrar las ventas donde el metodo_pago sea diferente de 'efectivo'
+        $totalGastosNoEfectivo = Gastos::where('metodo_pago', '!=', 'Efectivo')
+        ->where('modalidad_pago', 'Pagada')
+            ->sum('valor'); // 'total' es el campo que contiene el valor de la venta
+
+        return response()->json(['total' => $totalGastosNoEfectivo]);
+    }
+    public function obtenerTotalGastosPorEfectivoCredito()
+    {
+        $totalGastosCrediEfectivo = Gastos::where('metodo_pago', 'Efectivo')
+        ->where('modalidad_pago', 'A crédito')
+        ->sum('valor');
+
+        return response()->json(['total' => $totalGastosCrediEfectivo]);
+    }
+    public function obtenerTotalGastosNoEfectivoCredito()
+    {
+        // Filtrar las ventas donde el metodo_pago sea diferente de 'efectivo'
+        $totalGastosNoEfectivo = Gastos::where('metodo_pago', '!=', 'Efectivo')
+        ->where('modalidad_pago', 'A crédito')
+            ->sum('valor'); // 'total' es el campo que contiene el valor de la venta
+
+        return response()->json(['total' => $totalGastosNoEfectivo]);
+    }
 }

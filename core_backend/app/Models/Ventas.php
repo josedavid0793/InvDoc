@@ -8,19 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Ventas extends Model
 
 {
-    public function nombreProducto(){
+    public function nombreProducto()
+    {
         return $this->belongsTo(Producto::class, 'nombre_producto', 'nombre');
     }
 
-    public function modalidadPago(){
+    public function modalidadPago()
+    {
         return $this->belongsTo(ModalidadPago::class, 'modalidad_pago', 'modalidad');
     }
 
-    public function metodoPago(){
+    public function metodoPago()
+    {
         return $this->belongsTo(MetodoPago::class, 'metodo_pago', 'metodo');
     }
 
-    public function nombreCliente(){
+    public function nombreCliente()
+    {
         return $this->belongsTo(Clientes::class, 'nombre_cliente', 'nombre');
     }
     use HasFactory;

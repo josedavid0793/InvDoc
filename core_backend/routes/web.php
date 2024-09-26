@@ -41,14 +41,30 @@ Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
 
 // Rutas de ventas
 Route::get('/ventas/suma-total', [VentasController::class, 'sumarVentasTotales']);
+Route::get('/ventas/total', [VentasController::class, 'contarVentas']);
+Route::get('/ventas/total-abonos', [VentasController::class, 'contarVentasAbonos']);
+Route::get('/ventas/efectivo-total', [VentasController::class, 'obtenerTotalVentasPorEfectivo']);
+Route::get('/ventas/no-efectivo-total', [VentasController::class, 'obtenerTotalVentasNoEfectivo']);
+Route::get('/ventas/credito/efectivo-total', [VentasController::class, 'obtenerTotalVentasAcreditoEfectivo']);
+Route::get('/ventas/credito/no-efectivo-total', [VentasController::class, 'obtenerTotalVentasCreditoNoEfectivo']);
+Route::get('/ventas/totales', [VentasController::class, 'getTotalesCostosPrecios']);
+Route::get('/balance-reporte/pdf', [VentasController::class, 'exportarReportePDF']);
+Route::get('/balance-reporte/excel', [VentasController::class, 'exportarReporteExcel']);
 Route::get('/ventas', [VentasController::class,'index']);
 Route::post('/ventas', [VentasController::class,'store']);
 Route::get('/ventas/{id}', [VentasController::class,'show']);
 Route::put('/ventas/{id}', [VentasController::class,'update']);
 Route::delete('/ventas/{id}', [VentasController::class,'destroy']);
 
+
 //Rutas de gastos
 Route::get('/gastos/suma-total', [GastosController::class, 'sumarGastosTotales']);
+Route::get('/gastos/efectivo-total', [GastosController::class, 'obtenerTotalGastosPorEfectivo']);
+Route::get('/gastos/no-efectivo-total', [GastosController::class, 'obtenerTotalGastosNoEfectivo']);
+Route::get('/gastos/credito/efectivo-total', [GastosController::class, 'obtenerTotalGastosPorEfectivoCredito']);
+Route::get('/gastos/credito/no-efectivo-total', [GastosController::class, 'obtenerTotalGastosNoEfectivoCredito']);
+
+Route::get('/gastos/total', [GastosController::class, 'contarGastos']);
 Route::get('/gastos', [GastosController::class,'index']);
 Route::post('/gastos', [GastosController::class,'store']);
 

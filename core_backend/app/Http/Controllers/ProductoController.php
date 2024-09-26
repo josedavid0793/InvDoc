@@ -249,11 +249,6 @@ class ProductoController extends Controller
         return response()->json(['costo_total' => $costoTotal]);
     }
 
-    /* public function exportExcel()
-    {
-        return Excel::download(new ProductsExport, 'products.xlsx');
-    }*/
-
     public function exportPdf()
     {
         $productos = Producto::all();
