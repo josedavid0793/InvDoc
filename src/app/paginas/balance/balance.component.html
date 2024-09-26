@@ -32,7 +32,7 @@
         <a (click)="onOpenExpBalance()">Descargar Reportes</a>
       </div>
       <div class="div-ver-bal">
-        <a>Ver Balance ></a>
+        <a (click)="onOpenDetBalance()">Ver Balance ></a>
       </div>
     </div>
   </div>
@@ -42,4 +42,10 @@
 (close)="onCloseExpBalance()"
 class="crear-producto-overlay"
 ></app-balancereporte>
+<app-detallebalance
+*ngIf="isDetBalance"
+(close)="onCloseDetBalance()"
+(initialized)="onChildInitialized()"
+class="crear-producto-overlay2">
+</app-detallebalance>
 <app-footer></app-footer>

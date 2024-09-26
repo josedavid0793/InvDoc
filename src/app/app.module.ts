@@ -24,6 +24,7 @@ import { EliminarproductoComponent } from './componentes/eliminarproducto/elimin
 import { EditarproductoComponent } from './componentes/editarproducto/editarproducto.component';
 import { BalanceComponent } from './paginas/balance/balance.component';
 import { BalancereporteComponent } from './componentes/balancereporte/balancereporte.component';
+import { DetallebalanceComponent } from './componentes/detallebalance/detallebalance.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { BalancereporteComponent } from './componentes/balancereporte/balancerep
     EliminarproductoComponent,
     EditarproductoComponent,
     BalanceComponent,
-    BalancereporteComponent
+    BalancereporteComponent,
+    DetallebalanceComponent
   ],
   imports: [
     ReactiveFormsModule,
