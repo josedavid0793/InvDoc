@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Clientes;
+use Illuminate\Support\Facades\Validator;
 
 class ClientesController extends Controller
 {
@@ -15,7 +16,7 @@ class ClientesController extends Controller
     public function index()
     {
         $clientes = Clientes::all();
-        return response()->json([$clientes,200]);
+        return response()->json([$clientes, 200]);
     }
 
     /**
@@ -26,7 +27,45 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reglas = [
+            "nombre" => "required|string|max:100",
+            "telefono" => "required|numeric",
+            'tipo_documento' => 'required|string',
+            'numero_documento' => 'required|string',
+            'comentarios' => 'nullable'
+        ];
+
+        $validador = Validator::make($request->all(),$reglas);
+        if ($validador->fails()) {
+            return response()->json([
+                'error' => 'Ha ocurrido un error al validar los datos enviados',
+                'mensaje' => $validador->errors()
+            ], 422);
+        }
+        try {
+            //Verificar cliente por numero de celular
+            if (Clientes::where('telefono',$request->telefono)->exists()) {
+                return response()->json([
+                    'error' => 'Ya existe un cliente con ese telefono',
+                ], 422);}
+
+                $cliente = new Clientes();
+                $cliente->nombre = $request->nombre;
+                $cliente->telefono = $request->telefono;
+                $cliente->tipo_documento = $request->tipo_documento;
+                $cliente->numero_documento = $request->numero_documento;
+                $cliente->comentarios = $request->comentarios;
+                $cliente->save();
+
+                return response()->json([
+                    'mensaje' => 'Se ha creado el cliente ' . $cliente->nombre,
+                    'data' => $cliente
+                ], 200, [], JSON_UNESCAPED_UNICODE);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Ha ocurrido un error al agregar el cliente en la base de datos',
+                'mensaje' => $e->getMessage()
+            ], 500);        }
     }
 
     /**

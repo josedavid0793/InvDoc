@@ -72,6 +72,8 @@ Route::post('/gastos', [GastosController::class,'store']);
 
 // Rutas de clientes
 Route::get('/clientes', [ClientesController::class,'index']);
+Route::post('/clientes/crear', [ClientesController::class, 'store']);
+
 
 
 
