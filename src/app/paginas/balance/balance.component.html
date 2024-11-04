@@ -6,8 +6,13 @@
         <h2>Balance</h2>
       </div>
       <div class="div-p">
-        <p [ngClass]="{'positivo': totalBalance >= 0, 'negativo': totalBalance < 0}">
-            <strong>$ {{ totalBalance | number:'1.0-0'}}</strong>
+        <p
+          [ngClass]="{
+            positivo: totalBalance >= 0,
+            negativo: totalBalance < 0
+          }"
+        >
+          <strong>$ {{ totalBalance | number : "1.0-0" }}</strong>
         </p>
       </div>
     </div>
@@ -17,14 +22,14 @@
           <img src="../../../assets/incrementar.png" />
           <h3>Ingresos</h3>
         </div>
-        <p>$ {{ totalVentas | number:'1.0-0'}}</p>
+        <p>$ {{ totalVentas | number : "1.0-0" }}</p>
       </div>
       <div class="div-egresos">
         <div class="div-1-eg">
           <img src="../../../assets/disminucion.png" />
           <h3>Egresos</h3>
         </div>
-        <p>$ {{ totalGastos | number:'1.0-0'}}</p>
+        <p>$ {{ totalGastos | number : "1.0-0" }}</p>
       </div>
     </div>
     <div class="div-descargas">
@@ -36,16 +41,95 @@
       </div>
     </div>
   </div>
+
+  <div class="table-balance2">
+    <div class="div-ing-titulo" (click)="toggleView('ingresos')">
+      <p>Ingresos</p>
+      <button type="button" class="button1" (click)="onOpenCrearVenta()">Nueva Venta</button>
+    </div>
+    <div class="div-egr-titulo" (click)="toggleView('egresos')">
+      <p>Egresos</p>
+      <button type="button" class="button2">Agregar Gasto</button>
+    </div>
+  </div>
+  <div class="div-get-venta">
+    <div class="div-full-1" [ngClass]="{'active': activeView === 'ingresos'}">
+      <div class="div-venta" *ngFor="let venta of ventas">
+        <div class="div-venta-img">
+          <img src="../.././../assets/lucro.png" />
+        </div>
+        <div class="div-venta-det">
+          <div class="div-venta-det-p">
+            <p>{{ venta.nombre_producto }}</p>
+          </div>
+          <div class="div-venta-det-2">
+            <div class="div-venta-det-2-1">
+              <p>{{ venta.metodo_pago }}</p>
+            </div>
+            <div class="div-venta-det-2-1">
+              <p>{{ venta.fecha }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="div-venta-det2">
+          <div class="div-venta-det2-1">
+            <p>$ {{ venta.valor_total | number : "1.0-0"}}</p>
+          </div>
+          <div class="div-venta-det2-2">
+            <p>{{ venta.modalidad_pago }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="div-full-1" [ngClass]="{'active': activeView === 'egresos'}">
+      <div class="div-gasto"  *ngFor="let gasto of gastos">
+        <div class="div-gasto-img">
+          <img src="../.././../assets/depreciacion.png" />
+        </div>
+        <div class="div-gasto-det">
+          <div class="div-gasto-det-p">
+            <p>{{gasto.categoria_gasto}}</p>
+          </div>
+          <div class="div-gasto-det-2">
+            <div class="div-gasto-det-2-1">
+              <p>{{gasto.metodo_pago}}</p>
+            </div>
+            <div class="div-gasto-det-2-1">
+              <p>{{gasto.fecha}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="div-gasto-det2">
+          <div class="div-gasto-det2-1">
+            <p>$ {{gasto.valor | number : "1.0-0"}}</p>
+          </div>
+          <div class="div-gasto-det2-2">
+            <p>{{gasto.modalidad_pago}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
 </div>
+
 <app-balancereporte
-*ngIf="isExpBalance"
-(close)="onCloseExpBalance()"
-class="crear-producto-overlay"
+  *ngIf="isExpBalance"
+  (close)="onCloseExpBalance()"
+  class="crear-producto-overlay"
 ></app-balancereporte>
 <app-detallebalance
-*ngIf="isDetBalance"
-(close)="onCloseDetBalance()"
-(initialized)="onChildInitialized()"
-class="crear-producto-overlay2">
+  *ngIf="isDetBalance"
+  (close)="onCloseDetBalance()"
+  (initialized)="onChildInitialized()"
+  class="crear-producto-overlay2"
+>
 </app-detallebalance>
+<app-crearventa
+*ngIf="isOpenCrearVenta"
+(close)="onCloseCrearVenta()"
+class="crear-producto-overlay"
+></app-crearventa>
 <app-footer></app-footer>

@@ -57,21 +57,7 @@ select:focus {
   background-color: #0056b3;
   cursor: pointer;
 }
-.button-2 {
-  background-color: #95a5a6;
-  block-size: 50px;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-  inline-size: 220px;
-  font-size: larger;
-  padding: 10px 15px;
-}
-.button2:hover {
-  background-color: #bfc9ca;
-  cursor: pointer;
-}
+
 .div-form1 {
   align-items: center;
   block-size: 10%;
@@ -326,8 +312,7 @@ h2 {
     inline-size: 115px;
     block-size: 115px;
   }
-  .button-1,
-  .button-2 {
+  .button-1 {
     block-size: 46px;
     inline-size: 184px;
   }

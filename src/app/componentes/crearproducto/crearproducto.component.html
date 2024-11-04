@@ -136,9 +136,7 @@
       </div>
       <div class="div-button">
         <button class="button-1" type="submit" [disabled]="!productoForm.valid">Agregar</button>
-        <button class="button-2" type="button" (click)="onCancel()">
-          Cancelar
-        </button>
+        <app-buttoncancelar (close)="onClose()"></app-buttoncancelar>
       </div>
     </form>
   </div>

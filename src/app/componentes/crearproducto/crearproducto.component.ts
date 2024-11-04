@@ -1,11 +1,5 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ValidatorFn,
-  AbstractControl,
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductosService } from '../../servicios/productos.service';
 @Component({
   selector: 'app-crearproducto',
@@ -52,26 +46,26 @@ export class CrearproductoComponent implements OnInit {
   onSubmit() {
     if (this.productoForm.valid) {
       const formData = new FormData();
-      
+
       // Agregar los campos del formulario al FormData
-      Object.keys(this.productoForm.value).forEach(key => {
+      Object.keys(this.productoForm.value).forEach((key) => {
         formData.append(key, this.productoForm.get(key).value);
       });
 
       // Agregar los archivos seleccionados al FormData
       this.selectedFiles.forEach((file, index) => {
         formData.append(`imagen[]`, file, file.name);
-        console.log('no se cargo la imagen')
+        console.log('no se cargo la imagen');
       });
 
       this.productoService.crearProducto(formData).subscribe(
-        response => {
+        (response) => {
           this.successMessage = response.mensaje;
           this.errorMessage = '';
           console.log('Producto creado:', response);
           this.close.emit();
         },
-        error => {
+        (error) => {
           this.errorMessage = error;
           this.successMessage = '';
           console.error('Error al crear Producto:', error);
@@ -83,24 +77,23 @@ export class CrearproductoComponent implements OnInit {
       console.log('Formulario inválido');
     }
   }
- 
 
-    onFileChange(event: Event): void {
-      const input = event.target as HTMLInputElement;
-      if (input.files && input.files.length > 0) {
-        this.selectedFiles = Array.from(input.files);
-        
-        // Mostrar vista previa de la primera imagen
-        const firstFile = this.selectedFiles[0];
-        const reader = new FileReader();
-  
-        reader.onload = (e: any) => {
-          this.previewUrl = `url('${e.target.result}')`;
-        };
-  
-        reader.readAsDataURL(firstFile);
-      }
+  onFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFiles = Array.from(input.files);
+
+      // Mostrar vista previa de la primera imagen
+      const firstFile = this.selectedFiles[0];
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.previewUrl = `url('${e.target.result}')`;
+      };
+
+      reader.readAsDataURL(firstFile);
     }
+  }
 
   increment(): void {
     this.cantidad++;
@@ -117,7 +110,7 @@ export class CrearproductoComponent implements OnInit {
       this.cantidad = 0;
     }
   }
-  onCancel() {
+  onClose() {
     this.close.emit();
   }
 }

@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  AfterViewChecked ,
+  AfterViewChecked,
   ViewChild,
 } from '@angular/core';
 import { VentasService } from '../../servicios/ventas.service';
@@ -14,7 +14,7 @@ import Pusher from 'pusher-js';
   templateUrl: './balance.component.html',
   styleUrl: './balance.component.css',
 })
-export class BalanceComponent implements OnInit, OnDestroy  {
+export class BalanceComponent implements OnInit, OnDestroy {
   @ViewChild(DetallebalanceComponent)
   detallebalanceComponent!: DetallebalanceComponent;
   totalVentas: number = 0; // Variable para almacenar el total de ventas
@@ -24,6 +24,10 @@ export class BalanceComponent implements OnInit, OnDestroy  {
   private channel: any;
   isExpBalance: boolean = false;
   isDetBalance: boolean = false;
+  isOpenCrearVenta: boolean = false;
+  ventas: any[] = [];
+  gastos: any[] = [];
+  activeView: 'ingresos' | 'egresos' = 'ingresos';
 
   constructor(private ventasService: VentasService) {
     this.pusher = new Pusher('1858994', {
@@ -36,16 +40,17 @@ export class BalanceComponent implements OnInit, OnDestroy  {
     this.initializePusher();
     this.obtenerTotalGastos();
     this.initializePusher2();
+    this.cargarVentas();
+    this.cargarGastos();
   }
- // Método que se llamará cuando el componente hijo esté listo
- onChildInitialized() {
-  if (this.detallebalanceComponent.scrollableElement) {
-    const scrollableDiv = this.detallebalanceComponent.scrollableElement.nativeElement;
-    scrollableDiv.scrollTop = scrollableDiv.scrollHeight; // Mueve el scroll al final
+  // Método que se llamará cuando el componente hijo esté listo
+  onChildInitialized() {
+    if (this.detallebalanceComponent.scrollableElement) {
+      const scrollableDiv =
+        this.detallebalanceComponent.scrollableElement.nativeElement;
+      scrollableDiv.scrollTop = scrollableDiv.scrollHeight; // Mueve el scroll al final
+    }
   }
-}
-
-
 
   ngOnDestroy(): void {
     if (this.channel) {
@@ -100,5 +105,34 @@ export class BalanceComponent implements OnInit, OnDestroy  {
   }
   onCloseDetBalance() {
     this.isDetBalance = false;
+  }
+  onOpenCrearVenta(){
+    this.isOpenCrearVenta = true;
+  }
+  onCloseCrearVenta(){
+    this.isOpenCrearVenta=false;
+  }
+  cargarVentas() {
+    this.ventasService.getTotalVentasFull().subscribe(
+      (data: any[]) => {
+        this.ventas = data[0];
+      },
+      (error) => {
+        console.error('Error al obtener ventas', error);
+      }
+    );
+  }
+  cargarGastos() {
+    this.ventasService.getTotalGastosFull().subscribe(
+      (data: any[]) => {
+        this.gastos = data[0];
+      },
+      (error) => {
+        console.error('Error al obtener ventas', error);
+      }
+    );
+  }
+  toggleView(view: 'ingresos' | 'egresos'): void {
+    this.activeView = view;
   }
 }

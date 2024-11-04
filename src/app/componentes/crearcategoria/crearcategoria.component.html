@@ -43,9 +43,7 @@
       </div>
       <div class="div-button">
         <button class="button-1" type="submit" [disabled]="!categoriaForm.valid">Agregar</button>
-        <button class="button-2" type="button" (click)="onCancel()">
-          Cancelar
-        </button>
+        <app-buttoncancelar (close)="onCancel()"></app-buttoncancelar>
       </div>
     </form>
   </div>

@@ -176,11 +176,199 @@
   align-items: center;
 }
 
+.table-balance2 {
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.div-ing-titulo {
+  align-items: center;
+  border-block-end: #000 1px solid;
+  border-inline-end: #000 1px solid;
+  display: flex;
+  inline-size: 50%;
+  justify-content: center;
+  padding: 6px 10px;
+}
+.div-ing-titulo p {
+  font-size: 18px;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+}
+.div-egr-titulo {
+  align-items: center;
+  border-block-end: #000 1px solid;
+  display: flex;
+  inline-size: 50%;
+  justify-content: center;
+  padding: 6px 10px;
+}
+.div-egr-titulo p {
+  font-size: 18px;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+}
+.div-get-venta {
+  inline-size: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.div-full-1{
+  inline-size: 50%;
+}
+.div-venta,.div-gasto {
+  align-items: center;
+  border: #d5dbdb 1px solid;
+  display: flex;
+  flex-direction: row;
+  inline-size: 100%;
+  justify-content: space-between;
+}
+.div-venta{
+  background: #e9f7ef;
+}
+.div-gasto{
+  background: #fdedec;
+}
+.div-venta-img,.div-gasto-img {
+  align-items: center;
+  block-size: 100%;
+  inline-size: 15%;
+  display: flex;
+  justify-content: center;
+}
+.div-venta-det,.div-gasto-det {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  inline-size: 60%;
+}
+.div-venta-det-p,.div-gasto-det-p {
+  inline-size: 100%;
+}
+.div-venta-det-p p {
+  color: #424949;
+  font-size: 16px;
+  font-weight: 600;
+}
+.div-gasto-det-p p {
+  color: #424949;
+  font-size: 16px;
+  font-weight: 600;
+}
+.div-venta-det-2,.div-gasto-det-2 {
+  display: flex;
+  flex-direction: row;
+  inline-size: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.div-venta-det-2-1, .div-gasto-det-2-1 {
+  inline-size: 50%;
+}
+.div-venta-det-2-1 p {
+  color: #17202a;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.div-gasto-det-2-1 p {
+  color: #17202a;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.div-venta-det2,.div-gasto-det2{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  inline-size: 25%;
+  justify-content: space-between;
+}
+.div-venta-det2-1, .div-venta-det2-2 {
+  inline-size: 100%;
+  text-align: center;
+}
+.div-venta-det2-1 p{
+  font-size: 16px;
+  font-weight: bolder;
+  color: #000;
+}
+.div-venta-det2-2 p{
+  font-size: 14px;
+  font-weight: bolder;
+  color: darkgreen;
+}
+.div-gasto-det2-1 p{
+  font-size: 16px;
+  font-weight: bolder;
+  color: #000;
+}
+.div-gasto-det2-2 p{
+  font-size: 14px;
+  font-weight: bolder;
+  color: darkred;
+}
+
+.button1,.button2 {
+  background: #fff;
+  block-size: 47px;
+  border: 1px solid #fff;
+  border-radius: 40px;
+  color: #000;
+  font-size: 11px;
+  inline-size: 29%;
+  margin-inline-start: 10px;
+  padding: 8px 8px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+.button1:hover {
+  cursor: pointer;
+  background: #52be80;
+  text-decoration: none;
+}
+.button2:hover {
+  cursor: pointer;
+  background: #cb4335;
+  text-decoration: none;
+}
 @media (max-width: 600px) {
   .container-sup {
     margin-block-start: 20px;
   }
   .crear-producto-overlay2 {
     justify-content: center;
+  }
+  .div-get-venta {
+    display: block;
+  }
+
+  .div-full-1 {
+    display: none;
+    inline-size: 100%;
+  }
+
+  .div-full-1.active {
+    display: block;
+  }
+
+  .table-balance2 {
+    display: flex;
+    justify-content: space-around;
+    margin-block-end: 1rem;
+  }
+
+  .div-ing-titulo,
+  .div-egr-titulo {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  .div-ing-titulo.active,
+  .div-egr-titulo.active {
+    background-color: #007bff;
+    color: white;
   }
 }

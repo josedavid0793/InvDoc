@@ -1,0 +1,115 @@
+<div class="div-principal">
+  <div class="div-contenedor">
+    <form>
+      <div class="div-form1">
+        <h2>Agregar Venta</h2>
+      </div>
+      <div class="div-form3">
+        <label for="fecha" class="div-label">Fecha</label>
+        <div class="div-date">
+          <input type="date" class="input-date" name="fecha" />
+        </div>
+        <div class="div-switch">
+          <span [ngClass]="isPagada ? 'span-pagada' : 'inactive'">Pagada</span>
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="toggleStatus"
+              name="status"
+              [(ngModel)]="isPagada"
+            />
+            <span class="slider round"></span>
+          </label>
+          <span [ngClass]="!isPagada ? 'span-credito' : 'inactive'"
+            >A crédito</span
+          >
+        </div>
+      </div>
+      <div class="div-form2">
+        <div class="div-prod">
+          <label for="producto" class="div-label">Producto</label>
+          <select
+            class="custom-select"
+            id="producto"
+            name="nombre_producto"
+            [(ngModel)]="productoSeleccionado"
+            (change)="onSelectProducto($event)"
+          >
+            <option value="" disabled selected></option>
+            <option
+              *ngFor="let producto of productos"
+              [value]="producto.nombre"
+            >
+              {{ producto.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <div class="quantity-input">
+          <label for="cantidad_disponible" class="div-label">Cantidad</label>
+          <div class="input-group">
+            <button type="button" class="btn-minus" (click)="decrement()">
+              -
+            </button>
+            <input
+              name="cantidad"
+              class="input-form no-spinner"
+              id="cantidad_disponible"
+              type="number"
+              min="1"
+              [(ngModel)]="cantidad"
+              (change)="onInputChange()"
+            />
+            <button type="button" class="btn-plus" (click)="increment()">
+              +
+            </button>
+          </div>
+        </div>
+
+        <div class="precio-input">
+          <div>
+            <label for="precio_unidad" class="div-label">Precio Unitario</label>
+            <input
+              name="precio"
+              class="input-form no-spinner"
+              id="precio_unidad"
+              type="text"
+              [value]="precioUnitarioDisplay"
+              (focus)="onPrecioUnitarioFocus()"
+              (blur)="onPrecioUnitarioBlur($event)"
+            />
+          </div>
+        </div>
+
+        <div class="total-input">
+          <label for="total_precio" class="div-label">Total</label>
+          <input
+            name="total"
+            class="input-form no-spinner"
+            id="total_precio"
+            type="text"
+            [value]="totalPrecioDisplay"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="div-cliente">
+        <label for="cliente" class="div-label">Cliente</label>
+        <select
+          name="cliente"
+          class="custom-select custom-select2"
+          id="cliente"
+          [(ngModel)]="clienteSeleccionado"
+        >
+          <option value="" disabled selected></option>
+          <option *ngFor="let cliente of clientes" [value]="cliente.nombre">
+            {{ cliente.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <app-buttoncancelar (close)="onCancel()"></app-buttoncancelar>
+    </form>
+  </div>
+</div>

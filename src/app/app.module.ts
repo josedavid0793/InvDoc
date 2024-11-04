@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { provideHttpClient } from  '@angular/common/http' ; 
+import { CurrencyPipe } from '@angular/common';  // Asegúrate de importar CurrencyPipe
+
 
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
@@ -25,6 +27,8 @@ import { EditarproductoComponent } from './componentes/editarproducto/editarprod
 import { BalanceComponent } from './paginas/balance/balance.component';
 import { BalancereporteComponent } from './componentes/balancereporte/balancereporte.component';
 import { DetallebalanceComponent } from './componentes/detallebalance/detallebalance.component';
+import { CrearventaComponent } from './componentes/crearventa/crearventa.component';
+import { ButtoncancelarComponent } from './componentes/buttoncancelar/buttoncancelar.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,9 @@ import { DetallebalanceComponent } from './componentes/detallebalance/detallebal
     EditarproductoComponent,
     BalanceComponent,
     BalancereporteComponent,
-    DetallebalanceComponent
+    DetallebalanceComponent,
+    CrearventaComponent,
+    ButtoncancelarComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -56,7 +62,8 @@ import { DetallebalanceComponent } from './componentes/detallebalance/detallebal
     AppRoutingModule
     ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    CurrencyPipe
   ],
   bootstrap: [AppComponent],
  // schemas: [CUSTOM_ELEMENTS_SCHEMA]

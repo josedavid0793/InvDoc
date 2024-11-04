@@ -1,0 +1,289 @@
+.div-principal {
+  block-size: 100%;
+  display: table;
+  inline-size: 100%;
+}
+.div-contenedor {
+  display: flex;
+  justify-content: end;
+}
+form {
+  background-color: #f9f9f9;
+  block-size: 100vh;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  inline-size: 100%;
+  max-inline-size: 70%;
+  padding: 20px;
+}
+.div-form1 {
+  align-items: center;
+  block-size: 10%;
+  display: flex;
+  inline-size: 100%;
+}
+.div-form2 {
+  align-items: center;
+  border-block-start: #eaeded 1px solid;
+  display: flex;
+  gap: 13px;
+  justify-content: space-between;
+  inline-size: 100%;
+  padding: 10px 10px;
+}
+.div-prod {
+  block-size: 40%;
+  inline-size: 30%;
+}
+.div-label {
+  color: #000;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-block-end: 1px;
+}
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  inline-size: 100%;
+  padding: 8px 35px 8px 15px;
+  font-size: 16px;
+  border: 2px solid #cfd0d1;
+  border-radius: 25px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.custom-select:hover {
+  border-color: #aaadaf;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+
+/* Focus effect */
+.custom-select:focus {
+  outline: none;
+  border-color: #909294;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
+}
+.input-form {
+  border: 2px solid #cfd0d1;
+  border-radius: 20px;
+  box-sizing: border-box;
+  inline-size: 95%;
+  padding: 8px;
+}
+.input-form:focus {
+  border: 1px solid #ccc;
+  outline: none;
+}
+.quantity-input {
+  block-size: 40%;
+  display: flex;
+  flex-direction: column;
+  inline-size: 30%;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  text-align: center;
+  border-radius: 0;
+}
+
+.input-group button {
+  background-color: #f0f0f0;
+  block-size: 33px;
+  border: 1px solid #ccc;
+  color: #000;
+  cursor: pointer;
+  inline-size: 58px;
+  padding: 5px 10px;
+}
+
+.btn-minus {
+  border-radius: 5px 0 0 5px;
+}
+
+.btn-plus {
+  border-radius: 0 5px 5px 0;
+}
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield;
+}
+.precio-input {
+  inline-size: 20%;
+  block-size: 40%;
+}
+
+.total-input {
+  inline-size: 30%;
+  block-size: 40%;
+}
+.div-form3 {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  inline-size: 100%;
+  padding: 10px 10px
+}
+.div-date {
+  inline-size: 50%;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+}
+.input-date {
+  inline-size: 80%;
+  padding: 8px 35px 8px 15px;
+  font-size: 16px;
+  border: 2px solid #cfd0d1;
+  border-radius: 25px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Hover effect */
+.input-date:hover {
+  border-color: #cfd0d1;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+
+/* Focus effect */
+.input-date:focus {
+  outline: none;
+  border-color: #cfd0d1;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
+}
+
+/* Estilos para el placeholder */
+.input-date::placeholder {
+  color: #999;
+}
+
+/* Estilos para el calendario emergente (varían según el navegador) */
+.input-date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  inline-size: 100%;
+  block-size: 100%;
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+/* Contenedor del switch */
+.div-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+  margin-block-start: 20px;
+}
+
+/* Estilos del switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  inline-size: 50px;
+  block-size: 24px;
+}
+
+/* Esconde el input checkbox */
+.switch input {
+  opacity: 0;
+  inline-size: 0;
+  block-size: 0;
+}
+
+/* Fondo del switch */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+/* Botón del switch */
+.slider::before {
+  position: absolute;
+  content: "";
+  block-size: 18px;
+  inline-size: 18px;
+  inset-inline-start: 3px;
+  inset-block-end: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Cambiar color al estar activado */
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+/* Mover el botón al estar activado */
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* Forma redondeada del switch */
+.slider.round {
+  border-radius: 24px;
+}
+.span-pagada {
+  background: #03e246c5;
+  padding: 8px;
+  border-radius: 5px;
+  color: #fff;
+}
+.span-credito{
+  background: #e2030ece;
+  padding: 8px;
+  border-radius: 5px;
+  color: #fff;
+}
+.inactive {
+  background: #ccc;  /* Cambia a un color gris para el estado inactivo */
+  color: #000;  /* Cambia el color de texto a negro */
+  opacity: 0.5;  /* Añadir transparencia para el estado inactivo */
+}
+.div-cliente{
+  align-items: center;
+  border-block-end: #eaeded 1px solid;
+  border-block-start: #eaeded 1px solid;
+  display: flex;
+  gap: 13px;
+  justify-content: start;
+  inline-size: 100%;
+  margin-block-end: 34px;
+  margin-block-start: 24px;
+  padding: 20px 16px;
+}
+.custom-select2{
+  inline-size: 50% !important;
+}
